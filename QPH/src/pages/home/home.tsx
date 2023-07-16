@@ -1,5 +1,11 @@
-export function MyPage() {
+import Nav from "../../commonComponents/nav/Nav";
+
+const  Home: React.FC  =() => {
     return (
-        <h1>This is my home</h1>
+        <>
+        <Nav/>
+        </>
     );
 }
+
+export default Home;
