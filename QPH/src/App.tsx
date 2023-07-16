@@ -1,8 +1,8 @@
-import Home  from "../src/pages/home/home"
+import Home  from "../src/pages/home/Home";
+import Gastronomy from "../src/pages/gastronomy/Gastronomy";
+import Art from "./pages/art/Art";
+import Music from "./pages/music/Music";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Gastronomy from "../src/pages/gastronomy/gastronomy";
-import Art from "./pages/art/art";
-import Music from "./pages/music/music";
 
 
 
