@@ -1,4 +1,5 @@
 import { EventCard } from "../../commonComponents/eventCard/EventCard";
+import Carousel from "../../commonComponents/eventCard/carousel/Carousel";
 import Nav from "../../commonComponents/nav/Nav";
 import { Event } from "../../types";
 
@@ -18,8 +19,7 @@ const  Home: React.FC  =() => {
     return (
         <>
         <Nav/>
-
-        <EventCard event={testEvent} />
+        <Carousel/>               
         </>
     );
 }
