@@ -1,10 +1,8 @@
-import Home  from "../src/pages/home/Home";
-import Gastronomy from "../src/pages/gastronomy/Gastronomy";
-import Art from "./pages/art/Art";
-import Music from "./pages/music/Music";
+import Home from "./pages/home/home";
+import Gastronomy from "./pages/gastronomy/gastronomy";
+import Art from "./pages/art/art";
+import Music from "./pages/music/music";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
-
 
 function App() {
 
