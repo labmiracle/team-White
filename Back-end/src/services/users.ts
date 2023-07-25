@@ -16,5 +16,6 @@ export const getUser = (id: number) => {
 export const save = (user: IUser) => {
     user.id = ids++;
     users.push(user);
+    console.log(users);
 }
 

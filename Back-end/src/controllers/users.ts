@@ -3,15 +3,30 @@ import { getUsers, getUser, save } from "./../services/users";
 import { User } from "../models/user";
 
 export const getAllUsers = (req: Request, res: Response) => {
-    res.json(getUsers);
+    res.json(getUsers());
 }
 
 export const getById = (req: Request, res: Response) => {
-    res.json(getUser(Number(req.params.id)));
+    const user = getUser(Number(req.params.id));
+    if (user) {
+        res.json(user);
+    } else {
+        res.status(404).end();
+    }
 }
 
 export const saveUser = (req: Request, res: Response) => {
-    const user = new User(req.body.name, req.body.mail, req.body.password);
-    save(user);
-    res.send("Saving user");
+    const { name, mail, password } = req.body;
+
+    if (!name) {
+        res.status(400).send("Name is required");
+    } else if (!mail) {
+        res.status(400).send("Mail is required");
+    } else if (!password) {
+        res.status(400).send("Password is required");
+    } else {
+        const user = new User(name, mail, password);
+        save(user);
+        res.status(201).send("Saving user");
+    }
 }
