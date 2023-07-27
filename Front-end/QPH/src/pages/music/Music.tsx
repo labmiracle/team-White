@@ -1,11 +1,12 @@
 import React from 'react'
-import styles from "./Music.module.css"
 import Nav from '../../commonComponents/nav/Nav'
+import Footer from '../../commonComponents/footer/Footer'
 
 const Music : React.FC  = () => {
   return (
   <>
       <Nav/>
+      <Footer/>
   </>
   )
 }

@@ -1,5 +1,6 @@
 import { EventCard } from "../../commonComponents/eventCard/EventCard";
 import Carousel from "../../commonComponents/eventCard/carousel/Carousel";
+import Footer from "../../commonComponents/footer/Footer";
 import Nav from "../../commonComponents/nav/Nav";
 import { Event } from "../../types";
 
@@ -18,8 +19,9 @@ const testEvent = new Event(
 const  Home: React.FC  =() => {
     return (
         <>
-        <Nav/>
-        <Carousel/>               
+        <Nav/>        
+        <Carousel/>  
+        <Footer/>             
         </>
     );
 }

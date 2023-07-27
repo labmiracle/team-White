@@ -21,6 +21,9 @@ export default function Carousel() {
   console.log(events.length)
 
   return (
+<>
+  <h1>Los destacados del mes</h1>
+
     <div style={{ display: 'flex', justifyContent: 'space-evenly' }}>
       {events.map((event, index) => (
         <div
@@ -35,5 +38,6 @@ export default function Carousel() {
         </div>
       ))}
     </div>
+    </>
   );
 }
