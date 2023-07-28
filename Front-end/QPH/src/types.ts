@@ -1,4 +1,7 @@
-// Event.ts (or wherever your Event class is defined)
+import Muestra from './assets/Muestra.jpg';
+import festivalBandera from './assets/festivalBandera.jpg';
+import cata from './assets/cata.jpg';
+
 export class Event {
     category: string;
     image: string;
@@ -34,7 +37,7 @@ export class Event {
       return [
         new Event(
           "Música",
-          "https://source.unsplash.com/random",
+          festivalBandera,
           "Festival Bandera",
           "Oct 22",
           "14:00",
@@ -44,22 +47,21 @@ export class Event {
         ),
         new Event(
           "Arte",
-          "https://source.unsplash.com/random",
-          "Exposición de Arte",
+          Muestra,
+          "Muestra 'Crónicas'",
           "Nov 10",
           "10:30",
-          "Museo de Bellas Artes",
-          "Arte Creativo"
+          "Museo Castagnino",
+          "Secretaría de Cultura"
         ),
         new Event(
-          "Deportes",
-          "https://source.unsplash.com/random",
-          "Partido de Fútbol",
-          "Oct 15",
-          "19:00",
-          "Estadio Nacional",
-          "Liga Deportiva",
-          "www.eventcard.com"
+          "Gastronomía",
+          cata,
+          "Vino con calma",
+          "Ago 12",
+          "21:00",
+          "Matria Bar",
+          "WineRos"
         ),       
       ];
 

@@ -2,12 +2,12 @@
 
 .sectionTitle {
     font-family: 'Poppins', sans-serif;
-    font-size: x-large;
+    font-size: 800;
     background-color: #FFA41B;
     color: white;
     display: flex;
     flex-direction: column;    
-    width: 500px;
+    width: 400px;
     text-align: center;
     margin: 50px;
     border-radius: 20px;
