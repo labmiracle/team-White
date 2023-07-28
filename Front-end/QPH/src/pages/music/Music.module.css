@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+.sectionTitle {
+    font-family: 'Poppins', sans-serif;
+    font-size: x-large;
+    background-color: #FFA41B;
+    color: white;
+    display: flex;
+    flex-direction: column;    
+    width: 500px;
+    text-align: center;
+    margin: 50px;
+    border-radius: 20px;
+    box-shadow: #00000020 0 4px 12px;
+    border-top: .1em solid #FFA41B;
+    border-bottom: .1em solid #FFA41B;
+}

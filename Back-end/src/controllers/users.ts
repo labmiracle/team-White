@@ -1,9 +1,11 @@
 import { Request, Response } from "express";
 import { getUsers, getUser, save } from "./../services/users";
 import { User } from "../models/user";
+import { findAllUsers } from "../repositories/users";
 
 export const getAllUsers = (req: Request, res: Response) => {
-    res.json(getUsers());
+    findAllUsers();
+    res.end();
 }
 
 export const getById = (req: Request, res: Response) => {

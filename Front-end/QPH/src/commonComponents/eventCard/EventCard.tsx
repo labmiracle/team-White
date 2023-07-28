@@ -1,5 +1,3 @@
-import { useState } from "react";
-import { Event } from "../../types";
 import { CategoryTag } from "./CategoryTag";
 import styles from "./styles/EventCard.module.css";
 import { EventCardProps } from "../../types";

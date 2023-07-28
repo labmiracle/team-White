@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Event } from "../../../types";
-import { EventCard } from "../EventCard";
+import { Event } from "../../types";
+import { EventCard } from "../eventCard/EventCard";
+import styles from './Carousel.module.css';
 
 export default function Carousel() {
   const events: Event[] = Event.createEventList();
@@ -22,7 +23,7 @@ export default function Carousel() {
 
   return (
 <>
-  <h1>Los destacados del mes</h1>
+  <h1 className={styles.sectionTitle}>Los destacados del mes</h1>
 
     <div style={{ display: 'flex', justifyContent: 'space-evenly' }}>
       {events.map((event, index) => (

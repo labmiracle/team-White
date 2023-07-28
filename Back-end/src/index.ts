@@ -1,10 +1,11 @@
 import express from 'express';
 import dotenv from 'dotenv';
+dotenv.config();
 import home from './routes/home';
 import users from './routes/users';
 import events from './routes/events';
 
-dotenv.config();
+
 
 const port = process.env.PORT || 5555;
 const app = express();
