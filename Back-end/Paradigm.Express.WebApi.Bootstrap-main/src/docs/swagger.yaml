@@ -1,0 +1,15 @@
+basePath: null
+definitions: {}
+info:
+    description: 'Paradigm API.'
+    license:
+        name: ISC
+    title: paradigm-api
+    version: 1.0.0
+paths: {}
+swagger: '2.0'
+securityDefinitions:
+    'client secret':
+        type: apiKey
+        name: x-auth
+        in: header
