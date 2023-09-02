@@ -1,11 +1,11 @@
 import { ApiServer } from "@miracledevs/paradigm-express-webapi";
 import express from "express";
-import cors from "cors";
+import cors from "Cors";
 import swaggerUi from "swagger-ui-express";
 import * as swaggerDocument from "./docs/swagger.json";
 import { MySqlConnectionFilter } from "./filters/mysql.filter";
 import { HealthController } from "./controllers/health.controller";
-import { Configuration } from "./configuration/Configuration";
+import { Configuration } from "./configuration/configuration";
 
 /**
  * Represents the api server application.
