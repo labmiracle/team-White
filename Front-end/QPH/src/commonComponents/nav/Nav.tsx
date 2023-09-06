@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import style from "../nav/nav.module.css";
-import logoqph from "../../assets/logoqph.png";
+import logoqph from "../../assets/logoqph.png"; 
 
 const Nav: React.FC = () => {
   return (
@@ -29,7 +29,10 @@ const Nav: React.FC = () => {
               <li className={style.listItem}>
                 {/* <Link className={style.link}  to="/filtrar">Filtrar</Link> */}
                 Filtrar
-
+              </li>
+              <li className={style.listItem}>
+                { <Link className={style.link}  to="/login">Conectar</Link>}
+                Mi Cuenta
               </li>
             </ul>
           </div>
