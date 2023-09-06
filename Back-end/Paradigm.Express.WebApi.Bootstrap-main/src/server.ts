@@ -6,6 +6,7 @@ import * as swaggerDocument from "./docs/swagger.json";
 import { MySqlConnectionFilter } from "./filters/mysql.filter";
 import { HealthController } from "./controllers/health.controller";
 import { Configuration } from "./configuration/configuration";
+import { UsersController } from "./controllers/users.controller";
 
 /**
  * Represents the api server application.
@@ -29,7 +30,7 @@ export class Server extends ApiServer {
             .use(express.json())
             .listen(port, () => this.logger.debug(`Listening on: http://localhost:${port}`));
 
-        this.registerControllers([HealthController]);
+        this.registerControllers([HealthController, UsersController]);
         this.routing.ignoreClosedResponseOnFilters();
         this.routing.registerGlobalFilters([MySqlConnectionFilter]);
     }
