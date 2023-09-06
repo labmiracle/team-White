@@ -3,6 +3,8 @@ import Gastronomy from "./pages/gastronomy/Gastronomy";
 import Art from "./pages/art/Art";
 import Music from "./pages/music/Music";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Login from "./pages/login/Login";
+import Register from "./pages/login/Register";
 
 function App() {
 
@@ -10,10 +12,12 @@ function App() {
     <div className="App">
       <BrowserRouter>
       <Routes>
-      <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/registrar" element={<Register />}/>
           <Route path="/gastronomy" element={<Gastronomy />} />
           <Route path="/muestras-artísticas" element={<Art />} />
           <Route path="/musica" element={<Music />} />
+          <Route path="/login" element={<Login />} />
         
       </Routes>
       </BrowserRouter>

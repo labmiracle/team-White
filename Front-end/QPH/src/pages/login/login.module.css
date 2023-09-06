@@ -1,0 +1,79 @@
+.loginContainer{
+    padding-top: 20px;
+    width: 90vw;
+    height: 40%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    
+}
+
+.formCOntainner form:hover{
+    border: solid #525FE1;
+    
+}
+.loginContainer img{
+    height: 500px;
+}
+
+
+.formCOntainner{
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;    
+    justify-content: space-around;
+    align-items: center;
+    width: 500px;
+    margin-right: 100px;
+}
+
+.formCOntainner form{
+    border: solid #000000 1px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    align-items:center;
+    flex-wrap: wrap;
+    
+}
+.formCOntainner form p{
+    font-size: 28px;
+    color: #525FE1;
+}
+/* .formCOntainner form input{
+    
+
+} */
+.formCOntainner form input[type="text"]{
+    text-align: left;
+    padding-left: 15px;
+    color: #FFA41B;
+    border: solid #FFA41B;
+    width: 80%;
+    height: 48px;
+    border-radius: 48px;
+}
+
+
+.formCOntainner form *{
+    margin: 15px;
+    }
+.loginbtn{
+    width: 176px;
+    height: 50px;
+    border-radius: 49px;
+    background-color: #525FE1;
+    color: #fff;
+    font-size: 24px;
+}
+
+/*Register stylesheet*/
+
+.nameContainer{
+    display: flex;
+
+}
+.organizationType{
+    display: flex;
+   }
