@@ -9,7 +9,7 @@ const Nav: React.FC = () => {
       <nav>
         <div className={style.container}>
           <div className={style.logoqph}>
-            <img src={logoqph} alt="Logo que pinta del sitio hoy" />
+            <img src={logoqph} alt="Logo del sitio: Que Pinta Hoy" />
           </div>
           <div className={style.menu + ' ' + style.u}>
             <ul>
@@ -21,16 +21,14 @@ const Nav: React.FC = () => {
                 
               </li>
               <li className={style.listItem}>
-                {/* <Link className={style.link}  to="/gaming">Gaming</Link> */}
-                Gaming
+                <Link className={style.link}  to="/muestras-artísticas">Arte</Link>
               </li>
               <li className={style.listItem}>
-                <Link className={style.link}  to="/muestras-artísticas">Muestras artísticas</Link>
+                <Link className={style.link}  to="/gastronomy">Gastronomía</Link>
               </li>
               <li className={style.listItem}>
                 {/* <Link className={style.link}  to="/filtrar">Filtrar</Link> */}
                 Filtrar
-
               </li>
               <li className={style.listItem}>
                 { <Link className={style.link}  to="/login">Conectar</Link>}
