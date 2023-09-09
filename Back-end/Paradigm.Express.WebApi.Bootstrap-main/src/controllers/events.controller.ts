@@ -1,4 +1,4 @@
-import { Action, ApiController, Controller, HttpContext } from "@miracledevs/paradigm-express-webapi";
+import { Action, ApiController, Controller, HttpContext, HttpMethod } from "@miracledevs/paradigm-express-webapi";
 import { EventsRepository } from "../repositories/events.repository";
 import { Event } from "../models/event";
 import { InsertionResult } from "../core/repositories/commands/db.command";
@@ -39,6 +39,18 @@ export class EventsController extends ApiController {
             this.httpContext.response.sendStatus(201);
             return event;
         }catch(error){
+            console.log(error);
+            this.httpContext.response.sendStatus(500);
+            return;
+        }
+    }
+
+    @Action({ route: "/", method: HttpMethod.PUT , fromBody: true })
+    async update(event: Event): Promise<Event> {
+        try{
+            this.httpContext.response.sendStatus(200);
+            return this.repo.update(event);
+        } catch(error){
             console.log(error);
             this.httpContext.response.sendStatus(500);
             return;
