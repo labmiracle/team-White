@@ -5,15 +5,15 @@ import { InsertionResult } from "../core/repositories/commands/db.command";
 
 @Controller({ route: "/api/events" })
 export class EventsController extends ApiController {
-    constructor(private repo: EventsRepository){
+    constructor(private repo: EventsRepository) {
         super();
     }
 
     @Action({ route: "/" })
     async get(): Promise<Event[]> {
-        try{
-            return this.repo.getAll();
-        } catch(error){
+        try {
+            return this.repo.find(" active = ?", [1]);
+        } catch (error) {
             console.log(error);
             this.httpContext.response.sendStatus(500);
             return;
@@ -22,9 +22,31 @@ export class EventsController extends ApiController {
 
     @Action({ route: "/:id" })
     async getOne(id: number): Promise<Event> {
-        try{
+        try {
             return this.repo.getById(id);
-        } catch(error){
+        } catch (error) {
+            console.log(error);
+            this.httpContext.response.sendStatus(500);
+            return;
+        }
+    }
+
+    @Action({ route: "/user/:id" })
+    async getByUser(id: number): Promise<Event[]> {
+        try {
+            return this.repo.find(" userId = ? AND active = ?", [id, 1]);
+        } catch (error) {
+            console.log(error);
+            this.httpContext.response.sendStatus(500);
+            return;
+        }
+    }
+
+    @Action({ route: "/category/:category" })
+    async getByCategory(category: string): Promise<Event[]> {
+        try {
+            return this.repo.find(" category = ? AND active = ?", [category, 1]);
+        } catch (error) {
             console.log(error);
             this.httpContext.response.sendStatus(500);
             return;
@@ -33,24 +55,24 @@ export class EventsController extends ApiController {
 
     @Action({ route: "/", fromBody: true })
     async post(event: Event): Promise<Event> {
-        try{
+        try {
             const metadata: InsertionResult<number> = await this.repo.insertOne(event);
             event.id = metadata.insertId;
             this.httpContext.response.sendStatus(201);
             return event;
-        }catch(error){
+        } catch (error) {
             console.log(error);
             this.httpContext.response.sendStatus(500);
             return;
         }
     }
 
-    @Action({ route: "/", method: HttpMethod.PUT , fromBody: true })
+    @Action({ route: "/", method: HttpMethod.PUT, fromBody: true })
     async update(event: Event): Promise<Event> {
-        try{
+        try {
             this.httpContext.response.sendStatus(200);
             return this.repo.update(event);
-        } catch(error){
+        } catch (error) {
             console.log(error);
             this.httpContext.response.sendStatus(500);
             return;

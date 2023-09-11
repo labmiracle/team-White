@@ -13,7 +13,7 @@ export class UsersController extends ApiController {
     @Action({ route: "/" })
     async get(): Promise<User[]> {
         try {
-            return this.repo.getAll();
+            return this.repo.find("active = ?", [1]);
         } catch (error) {
             console.log(error);
             this.httpContext.response.sendStatus(500);
