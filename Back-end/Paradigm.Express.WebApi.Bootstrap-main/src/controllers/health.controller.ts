@@ -1,8 +1,10 @@
 import { Action, ApiController, Controller } from "@miracledevs/paradigm-express-webapi";
 import { MySqlConnection } from "../core/mysql/mysql.connection";
 import { GET, Path } from "typescript-rest";
+import { Tags } from "typescript-rest-swagger";
 
 @Path( "/api/health" )
+@Tags("Health")
 @Controller({ route: "/api/health" })
 export class HealthController extends ApiController {
     constructor(private connection: MySqlConnection) {
