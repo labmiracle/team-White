@@ -1,5 +1,157 @@
 {
-	"definitions": {},
+	"definitions": {
+		"DOMHighResTimeStamp": {
+			"description": "",
+			"properties": {},
+			"type": "object"
+		},
+		"Event": {
+			"description": "An event which takes place in the DOM.",
+			"properties": {
+				"bubbles": {
+					"type": "boolean",
+					"description": "Returns true or false depending on how event was initialized. True if event goes through its target's ancestors in reverse tree order, and false otherwise."
+				},
+				"cancelBubble": {
+					"type": "boolean",
+					"description": ""
+				},
+				"cancelable": {
+					"type": "boolean",
+					"description": "Returns true or false depending on how event was initialized. Its return value does not always carry meaning, but true can indicate that part of the operation during which event was dispatched, can be canceled by invoking the preventDefault() method."
+				},
+				"composed": {
+					"type": "boolean",
+					"description": "Returns true or false depending on how event was initialized. True if event invokes listeners past a ShadowRoot node that is the root of its target, and false otherwise."
+				},
+				"currentTarget": {
+					"type": "object",
+					"description": "Returns the object whose event listener's callback is currently being invoked."
+				},
+				"defaultPrevented": {
+					"type": "boolean",
+					"description": "Returns true if preventDefault() was invoked successfully to indicate cancelation, and false otherwise."
+				},
+				"eventPhase": {
+					"type": "number",
+					"format": "double",
+					"description": "Returns the event's phase, which is one of NONE, CAPTURING_PHASE, AT_TARGET, and BUBBLING_PHASE."
+				},
+				"isTrusted": {
+					"type": "boolean",
+					"description": "Returns true if event was dispatched by the user agent, and false otherwise."
+				},
+				"returnValue": {
+					"type": "boolean",
+					"description": ""
+				},
+				"srcElement": {
+					"type": "object",
+					"description": ""
+				},
+				"target": {
+					"type": "object",
+					"description": "Returns the object to which event is dispatched (its target)."
+				},
+				"timeStamp": {
+					"$ref": "#/definitions/DOMHighResTimeStamp"
+				},
+				"type": {
+					"type": "string",
+					"description": "Returns the type of event, e.g. \"click\", \"hashchange\", or \"submit\"."
+				},
+				"AT_TARGET": {
+					"type": "number",
+					"format": "double",
+					"description": ""
+				},
+				"BUBBLING_PHASE": {
+					"type": "number",
+					"format": "double",
+					"description": ""
+				},
+				"CAPTURING_PHASE": {
+					"type": "number",
+					"format": "double",
+					"description": ""
+				},
+				"NONE": {
+					"type": "number",
+					"format": "double",
+					"description": ""
+				}
+			},
+			"type": "object",
+			"required": [
+				"bubbles",
+				"cancelBubble",
+				"cancelable",
+				"composed",
+				"currentTarget",
+				"defaultPrevented",
+				"eventPhase",
+				"isTrusted",
+				"returnValue",
+				"srcElement",
+				"target",
+				"timeStamp",
+				"type",
+				"AT_TARGET",
+				"BUBBLING_PHASE",
+				"CAPTURING_PHASE",
+				"NONE"
+			]
+		},
+		"User": {
+			"description": "",
+			"properties": {
+				"id": {
+					"type": "number",
+					"format": "double",
+					"description": ""
+				},
+				"name": {
+					"type": "string",
+					"description": ""
+				},
+				"lastName": {
+					"type": "string",
+					"description": ""
+				},
+				"alias": {
+					"type": "string",
+					"description": ""
+				},
+				"mail": {
+					"type": "string",
+					"description": ""
+				},
+				"password": {
+					"type": "string",
+					"description": ""
+				},
+				"userType": {
+					"type": "string",
+					"description": ""
+				},
+				"active": {
+					"type": "number",
+					"format": "double",
+					"description": ""
+				}
+			},
+			"type": "object",
+			"required": [
+				"id",
+				"name",
+				"lastName",
+				"mail",
+				"password",
+				"userType",
+				"active"
+			]
+		}
+	},
 	"info": {
 		"description": "Paradigm API.",
 		"license": {
@@ -8,7 +160,482 @@
 		"title": "paradigm-api",
 		"version": "1.0.0"
 	},
-	"paths": {},
+	"paths": {
+		"/api/events": {
+			"get": {
+				"operationId": "EventsGet",
+				"produces": [
+					"text/html",
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/Event"
+							}
+						}
+					},
+					"500": {
+						"description": "Internal server error",
+						"schema": {
+							"type": "string"
+						}
+					}
+				},
+				"description": "",
+				"tags": [
+					"Events"
+				],
+				"parameters": []
+			},
+			"post": {
+				"operationId": "EventsPost",
+				"produces": [
+					"application/json",
+					"text/html"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"$ref": "#/definitions/Event"
+						}
+					},
+					"201": {
+						"description": "Event created",
+						"schema": {
+							"$ref": "#/definitions/Event"
+						}
+					},
+					"500": {
+						"description": "Internal server error",
+						"schema": {
+							"type": "string"
+						}
+					}
+				},
+				"description": "",
+				"tags": [
+					"Events"
+				],
+				"consumes": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"description": "",
+						"in": "body",
+						"name": "event",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/Event"
+						}
+					}
+				]
+			},
+			"put": {
+				"operationId": "EventsUpdate",
+				"produces": [
+					"application/json",
+					"text/html"
+				],
+				"responses": {
+					"200": {
+						"description": "Event updated correctly",
+						"schema": {
+							"$ref": "#/definitions/Event"
+						}
+					},
+					"500": {
+						"description": "Internal server error",
+						"schema": {
+							"type": "string"
+						}
+					}
+				},
+				"description": "",
+				"tags": [
+					"Events"
+				],
+				"consumes": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"description": "",
+						"in": "body",
+						"name": "event",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/Event"
+						}
+					}
+				]
+			}
+		},
+		"/api/events/{id}": {
+			"get": {
+				"operationId": "EventsGetOne",
+				"produces": [
+					"text/html",
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"$ref": "#/definitions/Event"
+						}
+					},
+					"404": {
+						"description": "Event not found",
+						"schema": {
+							"type": "string"
+						}
+					}
+				},
+				"description": "",
+				"tags": [
+					"Events"
+				],
+				"parameters": [
+					{
+						"description": "",
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"type": "number",
+						"format": "double"
+					}
+				]
+			},
+			"delete": {
+				"operationId": "EventsDelete",
+				"produces": [
+					"application/json",
+					"text/html"
+				],
+				"responses": {
+					"200": {
+						"description": "Event deleted correctly",
+						"schema": {
+							"$ref": "#/definitions/Event"
+						}
+					},
+					"204": {
+						"description": "No content"
+					},
+					"500": {
+						"description": "Internal server error",
+						"schema": {
+							"type": "string"
+						}
+					}
+				},
+				"description": "",
+				"tags": [
+					"Events"
+				],
+				"parameters": [
+					{
+						"description": "",
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"type": "number",
+						"format": "double"
+					}
+				]
+			}
+		},
+		"/api/events/user/{id}": {
+			"get": {
+				"operationId": "EventsGetByUser",
+				"produces": [
+					"text/html",
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/Event"
+							}
+						}
+					},
+					"404": {
+						"description": "User not found",
+						"schema": {
+							"type": "string"
+						}
+					}
+				},
+				"description": "",
+				"tags": [
+					"Events"
+				],
+				"parameters": [
+					{
+						"description": "",
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"type": "number",
+						"format": "double"
+					}
+				]
+			}
+		},
+		"/api/events/category/{category}": {
+			"get": {
+				"operationId": "EventsGetByCategory",
+				"produces": [
+					"text/html",
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/Event"
+							}
+						}
+					},
+					"404": {
+						"description": "Category not found",
+						"schema": {
+							"type": "string"
+						}
+					}
+				},
+				"description": "",
+				"tags": [
+					"Events"
+				],
+				"parameters": [
+					{
+						"description": "",
+						"in": "path",
+						"name": "category",
+						"required": true,
+						"type": "string"
+					}
+				]
+			}
+		},
+		"/api/health": {
+			"get": {
+				"operationId": "HealthGet",
+				"produces": [
+					"text/html"
+				],
+				"responses": {
+					"204": {
+						"description": "No content"
+					}
+				},
+				"description": "",
+				"tags": [
+					"Health"
+				],
+				"parameters": []
+			}
+		},
+		"/api/users": {
+			"get": {
+				"operationId": "UsersGet",
+				"produces": [
+					"text/html",
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/User"
+							}
+						}
+					},
+					"500": {
+						"description": "Internal server error",
+						"schema": {
+							"type": "string"
+						}
+					}
+				},
+				"description": "",
+				"tags": [
+					"Users"
+				],
+				"parameters": []
+			},
+			"post": {
+				"operationId": "UsersPost",
+				"produces": [
+					"application/json",
+					"text/html"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"$ref": "#/definitions/User"
+						}
+					},
+					"201": {
+						"description": "User created",
+						"schema": {
+							"$ref": "#/definitions/User"
+						}
+					},
+					"500": {
+						"description": "Internal server error",
+						"schema": {
+							"type": "string"
+						}
+					}
+				},
+				"description": "",
+				"tags": [
+					"Users"
+				],
+				"consumes": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"description": "",
+						"in": "body",
+						"name": "user",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/User"
+						}
+					}
+				]
+			},
+			"put": {
+				"operationId": "UsersUpdate",
+				"produces": [
+					"application/json",
+					"text/html"
+				],
+				"responses": {
+					"200": {
+						"description": "User updated correctly",
+						"schema": {
+							"$ref": "#/definitions/User"
+						}
+					},
+					"500": {
+						"description": "Internal server error",
+						"schema": {
+							"type": "string"
+						}
+					}
+				},
+				"description": "",
+				"tags": [
+					"Users"
+				],
+				"consumes": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"description": "",
+						"in": "body",
+						"name": "user",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/User"
+						}
+					}
+				]
+			}
+		},
+		"/api/users/{id}": {
+			"get": {
+				"operationId": "UsersGetOne",
+				"produces": [
+					"text/html",
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"$ref": "#/definitions/User"
+						}
+					},
+					"404": {
+						"description": "User not found",
+						"schema": {
+							"type": "string"
+						}
+					}
+				},
+				"description": "",
+				"tags": [
+					"Users"
+				],
+				"parameters": [
+					{
+						"description": "",
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"type": "number",
+						"format": "double"
+					}
+				]
+			},
+			"delete": {
+				"operationId": "UsersDelete",
+				"produces": [
+					"application/json",
+					"text/html"
+				],
+				"responses": {
+					"200": {
+						"description": "User deleted correctly",
+						"schema": {
+							"$ref": "#/definitions/User"
+						}
+					},
+					"500": {
+						"description": "Internal server error",
+						"schema": {
+							"type": "string"
+						}
+					}
+				},
+				"description": "",
+				"tags": [
+					"Users"
+				],
+				"parameters": [
+					{
+						"description": "",
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"type": "number",
+						"format": "double"
+					}
+				]
+			}
+		}
+	},
 	"swagger": "2.0",
 	"securityDefinitions": {
 		"client secret": {

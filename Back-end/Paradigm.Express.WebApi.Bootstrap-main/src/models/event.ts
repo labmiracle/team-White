@@ -11,4 +11,7 @@ export class Event implements IEvent {
     time: string = '';
     description: string = '';
     active: number = 0;
+    userId: number = 0;
+    image: string = '';
+    category: string = '';
 }
