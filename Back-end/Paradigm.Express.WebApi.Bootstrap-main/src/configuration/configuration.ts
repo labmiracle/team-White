@@ -20,4 +20,9 @@ export class Configuration {
      * Session timeout
      */
     sessionTimeout: string;
+
+    /**
+     * Json web token password
+     */
+    jwtSecret: string;
 }

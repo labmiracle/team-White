@@ -476,6 +476,13 @@
 				"tags": [
 					"Users"
 				],
+				"security": [
+					{
+						"default": [
+							"x-auth"
+						]
+					}
+				],
 				"parameters": []
 			},
 			"post": {
@@ -507,6 +514,13 @@
 				"description": "",
 				"tags": [
 					"Users"
+				],
+				"security": [
+					{
+						"default": [
+							"x-auth"
+						]
+					}
 				],
 				"consumes": [
 					"application/json"
@@ -546,6 +560,13 @@
 				"description": "",
 				"tags": [
 					"Users"
+				],
+				"security": [
+					{
+						"default": [
+							"x-auth"
+						]
+					}
 				],
 				"consumes": [
 					"application/json"
@@ -588,6 +609,13 @@
 				"tags": [
 					"Users"
 				],
+				"security": [
+					{
+						"default": [
+							"x-auth"
+						]
+					}
+				],
 				"parameters": [
 					{
 						"description": "",
@@ -623,6 +651,13 @@
 				"tags": [
 					"Users"
 				],
+				"security": [
+					{
+						"default": [
+							"x-auth"
+						]
+					}
+				],
 				"parameters": [
 					{
 						"description": "",
@@ -638,7 +673,7 @@
 	},
 	"swagger": "2.0",
 	"securityDefinitions": {
-		"client secret": {
+		"default": {
 			"type": "apiKey",
 			"name": "x-auth",
 			"in": "header"

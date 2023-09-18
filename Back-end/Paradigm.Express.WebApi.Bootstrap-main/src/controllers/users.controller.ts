@@ -2,13 +2,15 @@ import { Action, ApiController, Controller, HttpMethod } from "@miracledevs/para
 import { User } from "../models/user";
 import { UsersRepository } from "../repositories/users.repository";
 import { InsertionResult } from "../core/repositories/commands/db.command";
-import { DELETE, GET, POST, PUT, Path, PathParam } from "typescript-rest";
+import { DELETE, GET, POST, PUT, Path, PathParam, Security } from "typescript-rest";
 import { Response, Tags } from "typescript-rest-swagger";
+import { AuthFilter } from "../filters/auth.filter";
 
 
+@Security("x-auth")
 @Path( "/api/users" )
 @Tags("Users")
-@Controller({ route: "/api/users" })
+@Controller({ route: "/api/users", filters: [AuthFilter]  })
 export class UsersController extends ApiController {
     constructor(private repo: UsersRepository) {
         super();
@@ -16,16 +18,17 @@ export class UsersController extends ApiController {
 
     @GET
     @Response<string>(500, "Internal server error")
-    @Action({ route: "/" })
+    @Action({ route: "/"})
     async get(): Promise<User[]> {
         try {
             return this.repo.find("active = ?", [1]);
         } catch (error) {
+            console.log(error);
             this.httpContext.response.sendStatus(500);
             return;
         }
     }
-
+    
     @GET
     @Response<string>(404, "User not found")
     @Path(":id")
@@ -38,7 +41,7 @@ export class UsersController extends ApiController {
             return;
         }
     }
-
+    
     @POST
     @Response<User>(201, "User created")
     @Response<string>(500, "Internal server error")
@@ -54,7 +57,7 @@ export class UsersController extends ApiController {
             return;
         }
     }
-
+    
     @PUT
     @Response<User>(200, "User updated correctly")
     @Response<string>(500, "Internal server error")
@@ -68,12 +71,12 @@ export class UsersController extends ApiController {
             return;
         }
     }
-
+    
     @DELETE
     @Response<User>(200, "User deleted correctly")
     @Response<string>(500, "Internal server error")
     @Path(":id")
-    @Action({ route: "/:id" })
+    @Action({ route: "/:id", filters: [AuthFilter] })
     async delete(@PathParam("id") id: number): Promise<User> {
         try {
             const user = await this.repo.getById(id);

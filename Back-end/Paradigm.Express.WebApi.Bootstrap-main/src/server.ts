@@ -8,6 +8,7 @@ import { HealthController } from "./controllers/health.controller";
 import { Configuration } from "./configuration/configuration";
 import { UsersController } from "./controllers/users.controller";
 import { EventsController } from "./controllers/events.controller";
+import { AuthFilter } from "./filters/auth.filter";
 
 /**
  * Represents the api server application.
