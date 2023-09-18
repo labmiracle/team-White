@@ -102,6 +102,24 @@
 				"NONE"
 			]
 		},
+		"AuthUser": {
+			"description": "",
+			"properties": {
+				"mail": {
+					"type": "string",
+					"description": ""
+				},
+				"password": {
+					"type": "string",
+					"description": ""
+				}
+			},
+			"type": "object",
+			"required": [
+				"mail",
+				"password"
+			]
+		},
 		"User": {
 			"description": "",
 			"properties": {
@@ -189,6 +207,13 @@
 				"tags": [
 					"Events"
 				],
+				"security": [
+					{
+						"default": [
+							"x-auth"
+						]
+					}
+				],
 				"parameters": []
 			},
 			"post": {
@@ -220,6 +245,13 @@
 				"description": "",
 				"tags": [
 					"Events"
+				],
+				"security": [
+					{
+						"default": [
+							"x-auth"
+						]
+					}
 				],
 				"consumes": [
 					"application/json"
@@ -259,6 +291,13 @@
 				"description": "",
 				"tags": [
 					"Events"
+				],
+				"security": [
+					{
+						"default": [
+							"x-auth"
+						]
+					}
 				],
 				"consumes": [
 					"application/json"
@@ -301,6 +340,13 @@
 				"tags": [
 					"Events"
 				],
+				"security": [
+					{
+						"default": [
+							"x-auth"
+						]
+					}
+				],
 				"parameters": [
 					{
 						"description": "",
@@ -338,6 +384,13 @@
 				"description": "",
 				"tags": [
 					"Events"
+				],
+				"security": [
+					{
+						"default": [
+							"x-auth"
+						]
+					}
 				],
 				"parameters": [
 					{
@@ -379,6 +432,13 @@
 				"tags": [
 					"Events"
 				],
+				"security": [
+					{
+						"default": [
+							"x-auth"
+						]
+					}
+				],
 				"parameters": [
 					{
 						"description": "",
@@ -419,6 +479,13 @@
 				"tags": [
 					"Events"
 				],
+				"security": [
+					{
+						"default": [
+							"x-auth"
+						]
+					}
+				],
 				"parameters": [
 					{
 						"description": "",
@@ -446,6 +513,40 @@
 					"Health"
 				],
 				"parameters": []
+			}
+		},
+		"/api/login": {
+			"post": {
+				"operationId": "LogInPost",
+				"produces": [
+					"text/html"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"type": "string"
+						}
+					}
+				},
+				"description": "",
+				"tags": [
+					"LogIn"
+				],
+				"consumes": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"description": "",
+						"in": "body",
+						"name": "authUser",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/AuthUser"
+						}
+					}
+				]
 			}
 		},
 		"/api/users": {

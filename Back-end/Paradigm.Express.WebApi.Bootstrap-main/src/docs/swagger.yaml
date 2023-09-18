@@ -81,6 +81,19 @@ definitions:
             - BUBBLING_PHASE
             - CAPTURING_PHASE
             - NONE
+    AuthUser:
+        description: ""
+        properties:
+            mail:
+                type: string
+                description: ""
+            password:
+                type: string
+                description: ""
+        type: object
+        required:
+            - mail
+            - password
     User:
         description: ""
         properties:
@@ -146,6 +159,10 @@ paths:
             description: ""
             tags:
                 - Events
+            security:
+                -
+                    default:
+                        - x-auth
             parameters: []
         post:
             operationId: EventsPost
@@ -168,6 +185,10 @@ paths:
             description: ""
             tags:
                 - Events
+            security:
+                -
+                    default:
+                        - x-auth
             consumes:
                 - application/json
             parameters:
@@ -195,6 +216,10 @@ paths:
             description: ""
             tags:
                 - Events
+            security:
+                -
+                    default:
+                        - x-auth
             consumes:
                 - application/json
             parameters:
@@ -223,6 +248,10 @@ paths:
             description: ""
             tags:
                 - Events
+            security:
+                -
+                    default:
+                        - x-auth
             parameters:
                 -
                     description: ""
@@ -250,6 +279,10 @@ paths:
             description: ""
             tags:
                 - Events
+            security:
+                -
+                    default:
+                        - x-auth
             parameters:
                 -
                     description: ""
@@ -278,6 +311,10 @@ paths:
             description: ""
             tags:
                 - Events
+            security:
+                -
+                    default:
+                        - x-auth
             parameters:
                 -
                     description: ""
@@ -306,6 +343,10 @@ paths:
             description: ""
             tags:
                 - Events
+            security:
+                -
+                    default:
+                        - x-auth
             parameters:
                 -
                     description: ""
@@ -325,6 +366,29 @@ paths:
             tags:
                 - Health
             parameters: []
+    /api/login:
+        post:
+            operationId: LogInPost
+            produces:
+                - text/html
+            responses:
+                '200':
+                    description: Ok
+                    schema:
+                        type: string
+            description: ""
+            tags:
+                - LogIn
+            consumes:
+                - application/json
+            parameters:
+                -
+                    description: ""
+                    in: body
+                    name: authUser
+                    required: true
+                    schema:
+                        $ref: '#/definitions/AuthUser'
     /api/users:
         get:
             operationId: UsersGet

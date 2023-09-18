@@ -2,9 +2,10 @@ import { Action, ApiController, Controller, HttpContext, HttpMethod } from "@mir
 import { EventsRepository } from "../repositories/events.repository";
 import { Event } from "../models/event";
 import { InsertionResult } from "../core/repositories/commands/db.command";
-import { DELETE, GET, POST, PUT, Path, PathParam } from "typescript-rest";
+import { DELETE, GET, POST, PUT, Path, PathParam, Security } from "typescript-rest";
 import { Response, Tags } from "typescript-rest-swagger";
 
+@Security("x-auth")
 @Path( "/api/events" )
 @Tags("Events")
 @Controller({ route: "/api/events" })
