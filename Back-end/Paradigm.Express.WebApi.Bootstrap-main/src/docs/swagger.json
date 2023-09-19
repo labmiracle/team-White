@@ -1,5 +1,72 @@
 {
 	"definitions": {
+		"AuthUser": {
+			"description": "",
+			"properties": {
+				"mail": {
+					"type": "string",
+					"description": ""
+				},
+				"password": {
+					"type": "string",
+					"description": ""
+				}
+			},
+			"type": "object",
+			"required": [
+				"mail",
+				"password"
+			]
+		},
+		"User": {
+			"description": "",
+			"properties": {
+				"id": {
+					"type": "number",
+					"format": "double",
+					"description": ""
+				},
+				"name": {
+					"type": "string",
+					"description": ""
+				},
+				"lastName": {
+					"type": "string",
+					"description": ""
+				},
+				"alias": {
+					"type": "string",
+					"description": ""
+				},
+				"mail": {
+					"type": "string",
+					"description": ""
+				},
+				"password": {
+					"type": "string",
+					"description": ""
+				},
+				"userType": {
+					"type": "string",
+					"description": ""
+				},
+				"active": {
+					"type": "number",
+					"format": "double",
+					"description": ""
+				}
+			},
+			"type": "object",
+			"required": [
+				"id",
+				"name",
+				"lastName",
+				"mail",
+				"password",
+				"userType",
+				"active"
+			]
+		},
 		"DOMHighResTimeStamp": {
 			"description": "",
 			"properties": {},
@@ -101,73 +168,6 @@
 				"CAPTURING_PHASE",
 				"NONE"
 			]
-		},
-		"AuthUser": {
-			"description": "",
-			"properties": {
-				"mail": {
-					"type": "string",
-					"description": ""
-				},
-				"password": {
-					"type": "string",
-					"description": ""
-				}
-			},
-			"type": "object",
-			"required": [
-				"mail",
-				"password"
-			]
-		},
-		"User": {
-			"description": "",
-			"properties": {
-				"id": {
-					"type": "number",
-					"format": "double",
-					"description": ""
-				},
-				"name": {
-					"type": "string",
-					"description": ""
-				},
-				"lastName": {
-					"type": "string",
-					"description": ""
-				},
-				"alias": {
-					"type": "string",
-					"description": ""
-				},
-				"mail": {
-					"type": "string",
-					"description": ""
-				},
-				"password": {
-					"type": "string",
-					"description": ""
-				},
-				"userType": {
-					"type": "string",
-					"description": ""
-				},
-				"active": {
-					"type": "number",
-					"format": "double",
-					"description": ""
-				}
-			},
-			"type": "object",
-			"required": [
-				"id",
-				"name",
-				"lastName",
-				"mail",
-				"password",
-				"userType",
-				"active"
-			]
 		}
 	},
 	"info": {
@@ -179,6 +179,71 @@
 		"version": "1.0.0"
 	},
 	"paths": {
+		"/api/auth/login": {
+			"post": {
+				"operationId": "AuthLogin",
+				"produces": [
+					"text/html"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"type": "string"
+						}
+					}
+				},
+				"description": "",
+				"tags": [
+					"Auth"
+				],
+				"consumes": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"description": "",
+						"in": "body",
+						"name": "authUser",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/AuthUser"
+						}
+					}
+				]
+			}
+		},
+		"/api/auth/register": {
+			"post": {
+				"operationId": "AuthPost",
+				"produces": [
+					"text/html"
+				],
+				"responses": {
+					"204": {
+						"description": "No content"
+					}
+				},
+				"description": "",
+				"tags": [
+					"Auth"
+				],
+				"consumes": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"description": "",
+						"in": "body",
+						"name": "user",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/User"
+						}
+					}
+				]
+			}
+		},
 		"/api/events": {
 			"get": {
 				"operationId": "EventsGet",
@@ -513,40 +578,6 @@
 					"Health"
 				],
 				"parameters": []
-			}
-		},
-		"/api/login": {
-			"post": {
-				"operationId": "LogInPost",
-				"produces": [
-					"text/html"
-				],
-				"responses": {
-					"200": {
-						"description": "Ok",
-						"schema": {
-							"type": "string"
-						}
-					}
-				},
-				"description": "",
-				"tags": [
-					"LogIn"
-				],
-				"consumes": [
-					"application/json"
-				],
-				"parameters": [
-					{
-						"description": "",
-						"in": "body",
-						"name": "authUser",
-						"required": true,
-						"schema": {
-							"$ref": "#/definitions/AuthUser"
-						}
-					}
-				]
 			}
 		},
 		"/api/users": {
