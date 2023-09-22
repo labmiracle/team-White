@@ -5,7 +5,6 @@ import { InsertionResult } from "../core/repositories/commands/db.command";
 import { DELETE, GET, POST, PUT, Path, PathParam, Security } from "typescript-rest";
 import { Response, Tags } from "typescript-rest-swagger";
 
-@Security("x-auth")
 @Path( "/api/events" )
 @Tags("Events")
 @Controller({ route: "/api/events" })
@@ -65,6 +64,7 @@ export class EventsController extends ApiController {
         }
     }
 
+    @Security("x-auth")
     @POST
     @Response<Event>(201, "Event created")
     @Response<string>(500, "Internal server error")
@@ -81,6 +81,7 @@ export class EventsController extends ApiController {
         }
     }
 
+    @Security("x-auth")
     @PUT
     @Response<Event>(200, "Event updated correctly")
     @Response<string>(500, "Internal server error")
@@ -95,6 +96,7 @@ export class EventsController extends ApiController {
         }
     }
 
+    @Security("x-auth")
     @DELETE
     @Response<Event>(200, "Event deleted correctly")
     @Response<string>(500, "Internal server error")

@@ -203,10 +203,6 @@ paths:
             description: ""
             tags:
                 - Events
-            security:
-                -
-                    default:
-                        - x-auth
             parameters: []
         post:
             operationId: EventsPost
@@ -292,10 +288,6 @@ paths:
             description: ""
             tags:
                 - Events
-            security:
-                -
-                    default:
-                        - x-auth
             parameters:
                 -
                     description: ""
@@ -355,10 +347,6 @@ paths:
             description: ""
             tags:
                 - Events
-            security:
-                -
-                    default:
-                        - x-auth
             parameters:
                 -
                     description: ""
@@ -387,10 +375,6 @@ paths:
             description: ""
             tags:
                 - Events
-            security:
-                -
-                    default:
-                        - x-auth
             parameters:
                 -
                     description: ""

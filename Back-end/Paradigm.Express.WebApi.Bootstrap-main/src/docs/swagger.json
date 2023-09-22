@@ -272,13 +272,6 @@
 				"tags": [
 					"Events"
 				],
-				"security": [
-					{
-						"default": [
-							"x-auth"
-						]
-					}
-				],
 				"parameters": []
 			},
 			"post": {
@@ -405,13 +398,6 @@
 				"tags": [
 					"Events"
 				],
-				"security": [
-					{
-						"default": [
-							"x-auth"
-						]
-					}
-				],
 				"parameters": [
 					{
 						"description": "",
@@ -497,13 +483,6 @@
 				"tags": [
 					"Events"
 				],
-				"security": [
-					{
-						"default": [
-							"x-auth"
-						]
-					}
-				],
 				"parameters": [
 					{
 						"description": "",
@@ -543,13 +522,6 @@
 				"description": "",
 				"tags": [
 					"Events"
-				],
-				"security": [
-					{
-						"default": [
-							"x-auth"
-						]
-					}
 				],
 				"parameters": [
 					{

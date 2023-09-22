@@ -26,7 +26,8 @@ export class AuthFilter implements IFilter {
 
     async afterExecute(): Promise<void> {}
 
-    async onError() {
+    async onError(httpContext: HttpContext) {
         console.error("Ups!");
+        httpContext.response.status(500).send("Authentication error");
     }
 }
