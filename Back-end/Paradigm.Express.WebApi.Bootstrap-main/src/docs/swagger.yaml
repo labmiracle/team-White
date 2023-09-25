@@ -164,7 +164,7 @@ paths:
                         $ref: '#/definitions/AuthUser'
     /api/auth/register:
         post:
-            operationId: AuthPost
+            operationId: AuthRegister
             produces:
                 - text/html
             responses:

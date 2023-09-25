@@ -1,5 +1,5 @@
 import { Action, ApiController, ConfigurationBuilder, Controller, HttpMethod } from "@miracledevs/paradigm-express-webapi";
-import { GET, POST, Path } from "typescript-rest";
+import { POST, Path } from "typescript-rest";
 import { Tags } from "typescript-rest-swagger";
 import { Configuration } from "../configuration/configuration";
 import { AuthUser } from "./auth.user";
@@ -7,7 +7,7 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import { UsersRepository } from "../repositories/users.repository";
 import { User } from "../models/user";
-import { InsertionResult } from "../core/repositories/commands/db.command";
+import { AuthServices } from "../services/auth.services";
 
 @Path("/api/auth")
 @Tags("Auth")
@@ -15,7 +15,7 @@ import { InsertionResult } from "../core/repositories/commands/db.command";
 export class AuthController extends ApiController {
     config: Configuration;
 
-    constructor(config: ConfigurationBuilder, private repo: UsersRepository) {
+    constructor(config: ConfigurationBuilder, private repo: UsersRepository, private service: AuthServices) {
         super();
         this.config = config.build(Configuration);
     }
@@ -25,11 +25,11 @@ export class AuthController extends ApiController {
     @Action({ route: "/login", fromBody: true, method: HttpMethod.POST })
     async login(authUser: AuthUser): Promise<string> {
         try {
-            const users = await this.repo.find(" mail = ? AND password = ?", [authUser.mail, authUser.password]);
+            const valid = await this.service.validateUser(authUser);
 
-            if (users.length === 1) {
-                return jwt.sign({ mail: users[0].mail }, this.config.jwtSecret);
-            }
+            if(valid){
+                return jwt.sign({ mail: authUser.mail }, this.config.jwtSecret);
+            }                
 
             this.httpContext.response.sendStatus(401);
         } catch {
@@ -41,8 +41,8 @@ export class AuthController extends ApiController {
 
     @POST
     @Path("/register")
-    @Action({ route: "/register", fromBody: true })
-    async post(user: User){
+    @Action({ route: "/register", fromBody: true, method: HttpMethod.POST })
+    async register(user: User){
         try{
 
             const users = await this.repo.find(" mail = ?", [user.mail]);
@@ -52,11 +52,8 @@ export class AuthController extends ApiController {
                 return;
             }
 
-            const metadata: InsertionResult<number> = await this.repo.insertOne(user);
-            user.id = metadata.insertId;
+            this.service.registerUser(user);
             this.httpContext.response.sendStatus(201);
-            return user;
-
         } catch{
             this.httpContext.response.sendStatus(500);
             return;
