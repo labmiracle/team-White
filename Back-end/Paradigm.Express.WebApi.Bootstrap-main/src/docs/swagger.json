@@ -1,6 +1,6 @@
 {
 	"definitions": {
-		"AuthUser": {
+		"LoginUser": {
 			"description": "",
 			"properties": {
 				"mail": {
@@ -54,6 +54,11 @@
 					"type": "number",
 					"format": "double",
 					"description": ""
+				},
+				"role": {
+					"type": "number",
+					"format": "double",
+					"description": ""
 				}
 			},
 			"type": "object",
@@ -64,7 +69,8 @@
 				"mail",
 				"password",
 				"userType",
-				"active"
+				"active",
+				"role"
 			]
 		},
 		"DOMHighResTimeStamp": {
@@ -183,13 +189,13 @@
 			"post": {
 				"operationId": "AuthLogin",
 				"produces": [
-					"text/html"
+					"application/json"
 				],
 				"responses": {
 					"200": {
 						"description": "Ok",
 						"schema": {
-							"type": "string"
+							"type": "object"
 						}
 					}
 				},
@@ -204,10 +210,10 @@
 					{
 						"description": "",
 						"in": "body",
-						"name": "authUser",
+						"name": "loginUser",
 						"required": true,
 						"schema": {
-							"$ref": "#/definitions/AuthUser"
+							"$ref": "#/definitions/LoginUser"
 						}
 					}
 				]
@@ -563,10 +569,7 @@
 					"200": {
 						"description": "Ok",
 						"schema": {
-							"type": "array",
-							"items": {
-								"$ref": "#/definitions/User"
-							}
+							"type": "object"
 						}
 					},
 					"500": {
@@ -599,7 +602,7 @@
 					"200": {
 						"description": "Ok",
 						"schema": {
-							"$ref": "#/definitions/User"
+							"type": "object"
 						}
 					},
 					"201": {
@@ -699,7 +702,7 @@
 					"200": {
 						"description": "Ok",
 						"schema": {
-							"$ref": "#/definitions/User"
+							"type": "object"
 						}
 					},
 					"404": {

@@ -2,9 +2,8 @@ import { Action, ApiController, ConfigurationBuilder, Controller, HttpMethod } f
 import { POST, Path } from "typescript-rest";
 import { Tags } from "typescript-rest-swagger";
 import { Configuration } from "../configuration/configuration";
-import { AuthUser } from "./auth.user";
+import { LoginUser } from "./login.user";
 import jwt from "jsonwebtoken";
-import bcrypt from "bcrypt";
 import { UsersRepository } from "../repositories/users.repository";
 import { User } from "../models/user";
 import { AuthServices } from "../services/auth.services";
@@ -23,13 +22,13 @@ export class AuthController extends ApiController {
     @POST
     @Path("/login")
     @Action({ route: "/login", fromBody: true, method: HttpMethod.POST })
-    async login(authUser: AuthUser): Promise<string> {
+    async login(loginUser: LoginUser): Promise<string | undefined> {
         try {
-            const valid = await this.service.validateUser(authUser);
+            const valid = await this.service.validateUser(loginUser);
 
-            if(valid){
-                return jwt.sign({ mail: authUser.mail }, this.config.jwtSecret);
-            }                
+            if (valid) {
+                return jwt.sign({ mail: loginUser.mail }, this.config.jwtSecret);
+            }
 
             this.httpContext.response.sendStatus(401);
         } catch {
@@ -42,19 +41,19 @@ export class AuthController extends ApiController {
     @POST
     @Path("/register")
     @Action({ route: "/register", fromBody: true, method: HttpMethod.POST })
-    async register(user: User){
-        try{
+    async register(user: User): Promise<void> {
+        try {
 
             const users = await this.repo.find(" mail = ?", [user.mail]);
 
-            if(users.length !== 0){
+            if (users.length !== 0) {
                 this.httpContext.response.status(409).send("Email already registered");
                 return;
             }
 
-            this.service.registerUser(user);
+            await this.service.registerUser(user);
             this.httpContext.response.sendStatus(201);
-        } catch{
+        } catch {
             this.httpContext.response.sendStatus(500);
             return;
         }

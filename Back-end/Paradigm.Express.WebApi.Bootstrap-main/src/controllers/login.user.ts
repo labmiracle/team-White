@@ -1,5 +1,5 @@
 
-export class AuthUser {
+export interface LoginUser {
     mail: string;
     password: string;
 }

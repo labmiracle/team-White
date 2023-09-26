@@ -1,6 +1,6 @@
 basePath: null
 definitions:
-    AuthUser:
+    LoginUser:
         description: ""
         properties:
             mail:
@@ -42,6 +42,10 @@ definitions:
                 type: number
                 format: double
                 description: ""
+            role:
+                type: number
+                format: double
+                description: ""
         type: object
         required:
             - id
@@ -51,6 +55,7 @@ definitions:
             - password
             - userType
             - active
+            - role
     DOMHighResTimeStamp:
         description: ""
         properties: {}
@@ -143,12 +148,12 @@ paths:
         post:
             operationId: AuthLogin
             produces:
-                - text/html
+                - application/json
             responses:
                 '200':
                     description: Ok
                     schema:
-                        type: string
+                        type: object
             description: ""
             tags:
                 - Auth
@@ -158,10 +163,10 @@ paths:
                 -
                     description: ""
                     in: body
-                    name: authUser
+                    name: loginUser
                     required: true
                     schema:
-                        $ref: '#/definitions/AuthUser'
+                        $ref: '#/definitions/LoginUser'
     /api/auth/register:
         post:
             operationId: AuthRegister
@@ -404,9 +409,7 @@ paths:
                 '200':
                     description: Ok
                     schema:
-                        type: array
-                        items:
-                            $ref: '#/definitions/User'
+                        type: object
                 '500':
                     description: 'Internal server error'
                     schema:
@@ -428,7 +431,7 @@ paths:
                 '200':
                     description: Ok
                     schema:
-                        $ref: '#/definitions/User'
+                        type: object
                 '201':
                     description: 'User created'
                     schema:
@@ -495,7 +498,7 @@ paths:
                 '200':
                     description: Ok
                     schema:
-                        $ref: '#/definitions/User'
+                        type: object
                 '404':
                     description: 'User not found'
                     schema:

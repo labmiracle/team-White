@@ -12,11 +12,21 @@
         "outDir": "../dist",
         "baseUrl": "./src/",
         "paths": {
-            "*": ["../node_modules/*"]
+            "*": [
+                "../node_modules/*"
+            ]
         },
-        "types": ["node"],
-        "typeRoots": ["node_modules/@types"]
+        "types": [
+            "node"
+        ],
+        "typeRoots": [
+            "node_modules/@types"
+        ]
     },
-    "include": ["./**/*.ts"],
-    "exclude": ["./**/*.test.ts"]
+    "include": [
+        "./**/*.ts"
+    ],
+    "exclude": [
+        "./**/*.test.ts"
+    ]
 }

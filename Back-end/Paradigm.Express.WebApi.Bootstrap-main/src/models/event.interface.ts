@@ -8,4 +8,7 @@ export interface IEvent {
     time: string;
     description: string;
     active: number;
+    userId: number;
+    image: string;
+    category: string;
 }

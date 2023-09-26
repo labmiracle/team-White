@@ -8,4 +8,5 @@ export interface IUser {
     password: string;
     userType: string;
     active: number;
+    role: number;
 }
