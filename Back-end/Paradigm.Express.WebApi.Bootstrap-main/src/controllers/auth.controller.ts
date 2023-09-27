@@ -24,7 +24,7 @@ export class AuthController extends ApiController {
     @Action({ route: "/login", fromBody: true, method: HttpMethod.POST })
     async login(loginUser: LoginUser): Promise<string | undefined> {
         try {
-            const valid = await this.service.validateUser(loginUser);
+            const valid = await this.service.validateLoginUser(loginUser);
 
             if (valid) {
                 return jwt.sign({ mail: loginUser.mail }, this.config.jwtSecret);

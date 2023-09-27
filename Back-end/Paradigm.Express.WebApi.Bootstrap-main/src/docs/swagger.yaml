@@ -36,7 +36,8 @@ definitions:
                 type: string
                 description: ""
             userType:
-                type: string
+                type: number
+                format: double
                 description: ""
             active:
                 type: number

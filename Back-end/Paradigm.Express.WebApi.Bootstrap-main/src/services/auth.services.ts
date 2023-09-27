@@ -8,7 +8,7 @@ import { LoginUser } from "../controllers/login.user";
 export class AuthServices {
     constructor(private repo: UsersRepository) { }
 
-    async validateUser(loginUser: LoginUser): Promise<boolean> {
+    async validateLoginUser(loginUser: LoginUser): Promise<boolean> {
         const users = await this.repo.find(" mail = ?", [loginUser.mail]);
 
         if (users.length === 1) {

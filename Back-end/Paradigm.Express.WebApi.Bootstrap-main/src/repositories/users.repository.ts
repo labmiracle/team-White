@@ -6,7 +6,15 @@ import { MySqlConnection } from "../core/mysql/mysql.connection";
 
 @Injectable({ lifeTime: DependencyLifeTime.Scoped })
 export class UsersRepository extends EditRepositoryBase<User, number>{
-    constructor(dependencyContainer: DependencyContainer, connection: MySqlConnection){
+    constructor(dependencyContainer: DependencyContainer, connection: MySqlConnection) {
         super(dependencyContainer, connection, User, "users");
+    }
+
+    async findByMail(mail: string) {
+        try {
+            return await this.find(" mail = ?", [mail]);
+        } catch {
+            throw new Error();
+        }
     }
 }

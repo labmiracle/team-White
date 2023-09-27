@@ -6,7 +6,7 @@ export interface IUser {
     alias?: string;
     mail: string;
     password: string;
-    userType: string;
+    userType: number;
     active: number;
     role: number;
 }

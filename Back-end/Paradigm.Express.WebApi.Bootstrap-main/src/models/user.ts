@@ -10,7 +10,7 @@ export class User implements IUser {
     alias?: string = "";
     mail: string = "";
     password: string = "";
-    userType: string = "";
+    userType: number = 0;
     active: number = 0;
     role: number = 0;
 }

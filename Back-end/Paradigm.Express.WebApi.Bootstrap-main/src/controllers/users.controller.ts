@@ -6,6 +6,7 @@ import { DELETE, GET, POST, PUT, Path, PathParam, Security } from "typescript-re
 import { Response, Tags } from "typescript-rest-swagger";
 import { AuthFilter } from "../filters/auth.filter";
 import { AdminFilter } from "../filters/admin.filter";
+import { UsersServices } from "../services/users.services";
 
 
 @Security("x-auth")
@@ -13,7 +14,7 @@ import { AdminFilter } from "../filters/admin.filter";
 @Tags("Users")
 @Controller({ route: "/api/users", filters: [AdminFilter] })
 export class UsersController extends ApiController {
-    constructor(private repo: UsersRepository) {
+    constructor(private repo: UsersRepository, private service: UsersServices) {
         super();
     }
 
@@ -49,10 +50,16 @@ export class UsersController extends ApiController {
     @Action({ route: "/", fromBody: true })
     async post(user: User): Promise<User | undefined> {
         try {
-            const metadata: InsertionResult<number> = await this.repo.insertOne(user);
-            user.id = metadata.insertId;
-            this.httpContext.response.sendStatus(201);
-            return user;
+            const errorMessage = await this.service.validateUser(user);
+            if (!errorMessage) {
+                const metadata: InsertionResult<number> = await this.repo.insertOne(user);
+                user.id = metadata.insertId;
+                this.httpContext.response.sendStatus(201);
+                return user;
+            }
+
+            this.httpContext.response.status(400).send(errorMessage);
+            return;
         } catch (error) {
             this.httpContext.response.sendStatus(500);
             return;
@@ -65,8 +72,23 @@ export class UsersController extends ApiController {
     @Action({ route: "/", method: HttpMethod.PUT, fromBody: true })
     async update(user: User): Promise<User | undefined> {
         try {
-            this.httpContext.response.sendStatus(200);
-            return this.repo.update(user);
+            const errorMessage = await this.service.validateUser(user);
+            if (!errorMessage) {
+                const existingUser = await this.repo.findByMail(user.mail);
+
+                if (existingUser.length === 0) {
+                    this.httpContext.response.status(404).send("User not found");
+                    return;
+                }
+
+                user.id = existingUser[0].id;
+
+                this.httpContext.response.sendStatus(200);
+                return await this.repo.update(user);
+            }
+
+            this.httpContext.response.status(400).send(errorMessage);
+            return;
         } catch (error) {
             this.httpContext.response.sendStatus(500);
             return;
