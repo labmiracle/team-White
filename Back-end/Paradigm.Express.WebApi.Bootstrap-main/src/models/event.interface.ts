@@ -11,4 +11,5 @@ export interface IEvent {
     userId: number;
     image: string;
     category: string;
+    featured?: number | null;
 }

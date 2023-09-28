@@ -5,7 +5,7 @@ import { InsertionResult } from "../core/repositories/commands/db.command";
 import { DELETE, GET, POST, PUT, Path, PathParam, Security } from "typescript-rest";
 import { Response, Tags } from "typescript-rest-swagger";
 
-@Path( "/api/events" )
+@Path("/api/events")
 @Tags("Events")
 @Controller({ route: "/api/events" })
 export class EventsController extends ApiController {
@@ -55,11 +55,30 @@ export class EventsController extends ApiController {
     @Response<string>(404, "Category not found")
     @Path("/category/:category")
     @Action({ route: "/category/:category" })
-    async getByCategory(@PathParam("category") category: string): Promise<Event[]> {
+    async getByCategory(@PathParam("category") category: string): Promise<Event[] | undefined> {
         try {
             return this.repo.find(" category = ? AND active = ?", [category, 1]);
         } catch (error) {
             this.httpContext.response.sendStatus(404);
+            return;
+        }
+    }
+
+    @GET
+    @Response<string>(404, "Featured events not found")
+    @Response<string>(500, "Internal server error")
+    @Action({ route: "/", method: HttpMethod.GET })
+    async getFeaturedEvents(): Promise<Event[] | undefined> {
+        try {
+            const events = await this.repo.find(" featured = ? AND active = ?", [1, 1]);
+            if (events.length === 0) {
+                this.httpContext.response.sendStatus(404);
+                return;
+            }
+
+            return events;
+        } catch {
+            this.httpContext.response.sendStatus(500);
             return;
         }
     }
@@ -88,6 +107,7 @@ export class EventsController extends ApiController {
     @Action({ route: "/", method: HttpMethod.PUT, fromBody: true })
     async update(event: Event): Promise<Event> {
         try {
+            // falta revisar que el usuario pueda editar solo sus eventos
             this.httpContext.response.sendStatus(200);
             return this.repo.update(event);
         } catch (error) {
@@ -102,13 +122,14 @@ export class EventsController extends ApiController {
     @Response<string>(500, "Internal server error")
     @Path(":id")
     @Action({ route: "/:id" })
-    async delete(@PathParam("id") id: number){
-        try{
+    async delete(@PathParam("id") id: number) {
+        try {
+            // falta revisar que el usuario pueda borrar solo sus eventos
             const event = await this.repo.getById(id);
             event.active = 0;
             this.repo.update(event);
             return event;
-        } catch(error){
+        } catch (error) {
             this.httpContext.response.sendStatus(500);
             return;
         }

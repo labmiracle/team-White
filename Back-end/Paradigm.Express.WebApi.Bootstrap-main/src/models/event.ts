@@ -14,4 +14,5 @@ export class Event implements IEvent {
     userId: number = 0;
     image: string = "";
     category: string = "";
+    featured?: number | null = null;
 }
