@@ -2,11 +2,12 @@ import { Action, ApiController, ConfigurationBuilder, Controller, HttpMethod } f
 import { POST, Path } from "typescript-rest";
 import { Tags } from "typescript-rest-swagger";
 import { Configuration } from "../configuration/configuration";
-import { LoginUser } from "./login.user";
+import { LoginUser } from "./controllerModels/login.user";
 import jwt from "jsonwebtoken";
 import { UsersRepository } from "../repositories/users.repository";
 import { User } from "../models/user";
 import { AuthServices } from "../services/auth.services";
+import { RegisterUser } from "./controllerModels/register.user";
 
 @Path("/api/auth")
 @Tags("Auth")
@@ -41,17 +42,17 @@ export class AuthController extends ApiController {
     @POST
     @Path("/register")
     @Action({ route: "/register", fromBody: true, method: HttpMethod.POST })
-    async register(user: User): Promise<void> {
+    async register(registerUser: RegisterUser): Promise<void> {
         try {
 
-            const users = await this.repo.find(" mail = ?", [user.mail]);
+            const users = await this.repo.find(" mail = ?", [registerUser.mail]);
 
             if (users.length !== 0) {
                 this.httpContext.response.status(409).send("Email already registered");
                 return;
             }
 
-            await this.service.registerUser(user);
+            await this.service.registerUser(registerUser);
             this.httpContext.response.sendStatus(201);
         } catch {
             this.httpContext.response.sendStatus(500);

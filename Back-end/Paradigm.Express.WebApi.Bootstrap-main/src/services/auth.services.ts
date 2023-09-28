@@ -2,7 +2,8 @@ import { DependencyLifeTime, Injectable } from "@miracledevs/paradigm-web-di";
 import { UsersRepository } from "../repositories/users.repository";
 import { User } from "../models/user";
 import bcrypt from "bcrypt";
-import { LoginUser } from "../controllers/login.user";
+import { LoginUser } from "../controllers/controllerModels/login.user";
+import { RegisterUser } from "../controllers/controllerModels/register.user";
 
 @Injectable({ lifeTime: DependencyLifeTime.Scoped })
 export class AuthServices {
@@ -36,9 +37,18 @@ export class AuthServices {
         throw new Error();
     }
 
-    async registerUser(user: User) {
+    async registerUser(user: RegisterUser) {
+        const newUser = new User;
         const salt = await bcrypt.genSalt(10);
-        user.password = await bcrypt.hash(user.password, salt);
-        await this.repo.insertOne(user);
+        newUser.password = await bcrypt.hash(user.password, salt);
+        newUser.name = user.name;
+        newUser.lastName = user.lastName;
+        newUser.alias = user.alias;
+        newUser.mail = user.mail;
+        newUser.userType = user.userType;
+        newUser.active = 1;
+        newUser.role = 0;
+
+        await this.repo.insertOne(newUser);
     }
 }

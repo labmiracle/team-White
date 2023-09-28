@@ -18,14 +18,9 @@
 				"password"
 			]
 		},
-		"User": {
+		"RegisterUser": {
 			"description": "",
 			"properties": {
-				"id": {
-					"type": "number",
-					"format": "double",
-					"description": ""
-				},
 				"name": {
 					"type": "string",
 					"description": ""
@@ -50,28 +45,15 @@
 					"type": "number",
 					"format": "double",
 					"description": ""
-				},
-				"active": {
-					"type": "number",
-					"format": "double",
-					"description": ""
-				},
-				"role": {
-					"type": "number",
-					"format": "double",
-					"description": ""
 				}
 			},
 			"type": "object",
 			"required": [
-				"id",
 				"name",
 				"lastName",
 				"mail",
 				"password",
-				"userType",
-				"active",
-				"role"
+				"userType"
 			]
 		},
 		"DOMHighResTimeStamp": {
@@ -175,6 +157,62 @@
 				"CAPTURING_PHASE",
 				"NONE"
 			]
+		},
+		"User": {
+			"description": "",
+			"properties": {
+				"id": {
+					"type": "number",
+					"format": "double",
+					"description": ""
+				},
+				"name": {
+					"type": "string",
+					"description": ""
+				},
+				"lastName": {
+					"type": "string",
+					"description": ""
+				},
+				"alias": {
+					"type": "string",
+					"description": ""
+				},
+				"mail": {
+					"type": "string",
+					"description": ""
+				},
+				"password": {
+					"type": "string",
+					"description": ""
+				},
+				"userType": {
+					"type": "number",
+					"format": "double",
+					"description": ""
+				},
+				"active": {
+					"type": "number",
+					"format": "double",
+					"description": ""
+				},
+				"role": {
+					"type": "number",
+					"format": "double",
+					"description": ""
+				}
+			},
+			"type": "object",
+			"required": [
+				"id",
+				"name",
+				"lastName",
+				"mail",
+				"password",
+				"userType",
+				"active",
+				"role"
+			]
 		}
 	},
 	"info": {
@@ -242,10 +280,10 @@
 					{
 						"description": "",
 						"in": "body",
-						"name": "user",
+						"name": "registerUser",
 						"required": true,
 						"schema": {
-							"$ref": "#/definitions/User"
+							"$ref": "#/definitions/RegisterUser"
 						}
 					}
 				]
@@ -253,7 +291,7 @@
 		},
 		"/api/events": {
 			"get": {
-				"operationId": "EventsGet",
+				"operationId": "EventsGetFeaturedEvents",
 				"produces": [
 					"text/html",
 					"application/json"
@@ -262,10 +300,13 @@
 					"200": {
 						"description": "Ok",
 						"schema": {
-							"type": "array",
-							"items": {
-								"$ref": "#/definitions/Event"
-							}
+							"type": "object"
+						}
+					},
+					"404": {
+						"description": "Featured events not found",
+						"schema": {
+							"type": "string"
 						}
 					},
 					"500": {
@@ -513,10 +554,7 @@
 					"200": {
 						"description": "Ok",
 						"schema": {
-							"type": "array",
-							"items": {
-								"$ref": "#/definitions/Event"
-							}
+							"type": "object"
 						}
 					},
 					"404": {
