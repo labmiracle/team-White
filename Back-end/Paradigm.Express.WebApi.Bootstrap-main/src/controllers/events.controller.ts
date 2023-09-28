@@ -1,15 +1,16 @@
 import { Action, ApiController, Controller, HttpContext, HttpMethod } from "@miracledevs/paradigm-express-webapi";
 import { EventsRepository } from "../repositories/events.repository";
 import { Event } from "../models/event";
-import { InsertionResult } from "../core/repositories/commands/db.command";
 import { DELETE, GET, POST, PUT, Path, PathParam, Security } from "typescript-rest";
 import { Response, Tags } from "typescript-rest-swagger";
+import { NewEvent } from "./controllerModels/new.event";
+import { EventsServices } from "../services/events.services";
 
 @Path("/api/events")
 @Tags("Events")
 @Controller({ route: "/api/events" })
 export class EventsController extends ApiController {
-    constructor(private repo: EventsRepository) {
+    constructor(private repo: EventsRepository, private service: EventsServices) {
         super();
     }
 
@@ -67,7 +68,8 @@ export class EventsController extends ApiController {
     @GET
     @Response<string>(404, "Featured events not found")
     @Response<string>(500, "Internal server error")
-    @Action({ route: "/", method: HttpMethod.GET })
+    @Path("/featured")
+    @Action({ route: "/featured", method: HttpMethod.GET })
     async getFeaturedEvents(): Promise<Event[] | undefined> {
         try {
             const events = await this.repo.find(" featured = ? AND active = ?", [1, 1]);
@@ -88,10 +90,9 @@ export class EventsController extends ApiController {
     @Response<Event>(201, "Event created")
     @Response<string>(500, "Internal server error")
     @Action({ route: "/", fromBody: true })
-    async post(event: Event): Promise<Event> {
+    async post(newEvent: NewEvent): Promise<Event> {
         try {
-            const metadata: InsertionResult<number> = await this.repo.insertOne(event);
-            event.id = metadata.insertId;
+            const event = await this.service.insertNewEvent(newEvent);
             this.httpContext.response.sendStatus(201);
             return event;
         } catch (error) {

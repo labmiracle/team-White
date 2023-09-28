@@ -158,6 +158,60 @@
 				"NONE"
 			]
 		},
+		"NewEvent": {
+			"description": "",
+			"properties": {
+				"title": {
+					"type": "string",
+					"description": ""
+				},
+				"place": {
+					"type": "string",
+					"description": ""
+				},
+				"address": {
+					"type": "string",
+					"description": ""
+				},
+				"date": {
+					"type": "string",
+					"description": ""
+				},
+				"time": {
+					"type": "string",
+					"description": ""
+				},
+				"description": {
+					"type": "string",
+					"description": ""
+				},
+				"userId": {
+					"type": "number",
+					"format": "double",
+					"description": ""
+				},
+				"image": {
+					"type": "string",
+					"description": ""
+				},
+				"category": {
+					"type": "string",
+					"description": ""
+				}
+			},
+			"type": "object",
+			"required": [
+				"title",
+				"place",
+				"address",
+				"date",
+				"time",
+				"description",
+				"userId",
+				"image",
+				"category"
+			]
+		},
 		"User": {
 			"description": "",
 			"properties": {
@@ -291,7 +345,7 @@
 		},
 		"/api/events": {
 			"get": {
-				"operationId": "EventsGetFeaturedEvents",
+				"operationId": "EventsGet",
 				"produces": [
 					"text/html",
 					"application/json"
@@ -300,13 +354,10 @@
 					"200": {
 						"description": "Ok",
 						"schema": {
-							"type": "object"
-						}
-					},
-					"404": {
-						"description": "Featured events not found",
-						"schema": {
-							"type": "string"
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/Event"
+							}
 						}
 					},
 					"500": {
@@ -366,10 +417,10 @@
 					{
 						"description": "",
 						"in": "body",
-						"name": "event",
+						"name": "newEvent",
 						"required": true,
 						"schema": {
-							"$ref": "#/definitions/Event"
+							"$ref": "#/definitions/NewEvent"
 						}
 					}
 				]
@@ -577,6 +628,40 @@
 						"type": "string"
 					}
 				]
+			}
+		},
+		"/api/events/featured": {
+			"get": {
+				"operationId": "EventsGetFeaturedEvents",
+				"produces": [
+					"text/html",
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"type": "object"
+						}
+					},
+					"404": {
+						"description": "Featured events not found",
+						"schema": {
+							"type": "string"
+						}
+					},
+					"500": {
+						"description": "Internal server error",
+						"schema": {
+							"type": "string"
+						}
+					}
+				},
+				"description": "",
+				"tags": [
+					"Events"
+				],
+				"parameters": []
 			}
 		},
 		"/api/health": {
