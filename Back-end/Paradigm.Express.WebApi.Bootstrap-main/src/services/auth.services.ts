@@ -39,7 +39,6 @@ export class AuthServices {
     async registerUser(user: User) {
         const salt = await bcrypt.genSalt(10);
         user.password = await bcrypt.hash(user.password, salt);
-        const insertResponse = await this.repo.insertOne(user);
-        console.log(insertResponse);
+        await this.repo.insertOne(user);
     }
 }

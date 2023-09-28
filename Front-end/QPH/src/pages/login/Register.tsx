@@ -1,8 +1,8 @@
-import style from "./login.module.css"
-import loginconcertimg from "../../assets/Concert-login.png"
-import Nav from "../../commonComponents/nav/Nav"
-import { useState } from "react"
-import axios from "axios"
+import style from "./login.module.css";
+import loginconcertimg from "../../assets/Concert-login.png";
+import Nav from "../../commonComponents/nav/Nav";
+import { useState } from "react";
+import axios from "axios";
 
 const Register = () => {
   const [name, setName] = useState('');
@@ -12,7 +12,7 @@ const Register = () => {
   const [active, setActive] = useState(false);
   const [artist, setArtist] = useState(false);
 
-  const handleRegister = async (e) => {
+  const handleRegister = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
 
     try {
