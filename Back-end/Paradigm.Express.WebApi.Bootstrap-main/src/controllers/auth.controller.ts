@@ -5,7 +5,6 @@ import { Configuration } from "../configuration/configuration";
 import { LoginUser } from "./controllerModels/login.user";
 import jwt from "jsonwebtoken";
 import { UsersRepository } from "../repositories/users.repository";
-import { User } from "../models/user";
 import { AuthServices } from "../services/auth.services";
 import { RegisterUser } from "./controllerModels/register.user";
 

@@ -4,7 +4,6 @@ import { UsersRepository } from "../repositories/users.repository";
 import { InsertionResult } from "../core/repositories/commands/db.command";
 import { DELETE, GET, POST, PUT, Path, PathParam, Security } from "typescript-rest";
 import { Response, Tags } from "typescript-rest-swagger";
-import { AuthFilter } from "../filters/auth.filter";
 import { AdminFilter } from "../filters/admin.filter";
 import { UsersServices } from "../services/users.services";
 

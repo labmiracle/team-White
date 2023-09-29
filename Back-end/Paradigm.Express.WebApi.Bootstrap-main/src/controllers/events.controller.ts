@@ -106,11 +106,18 @@ export class EventsController extends ApiController {
     @Response<Event>(200, "Event updated correctly")
     @Response<string>(500, "Internal server error")
     @Action({ route: "/", method: HttpMethod.PUT, fromBody: true })
-    async update(event: Event): Promise<Event> {
+    async update(event: Event): Promise<Event | undefined> {
         try {
-            // falta revisar que el usuario pueda editar solo sus eventos
-            this.httpContext.response.sendStatus(200);
-            return this.repo.update(event);
+            const token = this.httpContext.request.headers['x-auth'] as string;
+            const validId = await this.service.validateUserId(token, event.userId);
+
+            if (validId) {
+                this.httpContext.response.sendStatus(200);
+                return this.repo.update(event);
+            }
+
+            this.httpContext.response.status(403).send("You do not have permission to edit this event")
+            return;
         } catch (error) {
             this.httpContext.response.sendStatus(500);
             return;
@@ -125,11 +132,18 @@ export class EventsController extends ApiController {
     @Action({ route: "/:id" })
     async delete(@PathParam("id") id: number) {
         try {
-            // falta revisar que el usuario pueda borrar solo sus eventos
             const event = await this.repo.getById(id);
-            event.active = 0;
-            this.repo.update(event);
-            return event;
+            const token = this.httpContext.request.headers['x-auth'] as string;
+            const validId = await this.service.validateUserId(token, event.userId);
+
+            if (validId) {
+                event.active = 0;
+                this.repo.update(event);
+                return event;
+            }
+
+            this.httpContext.response.status(403).send("You do not have permission to delete this event")
+            return;
         } catch (error) {
             this.httpContext.response.sendStatus(500);
             return;
