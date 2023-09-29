@@ -1,5 +1,47 @@
 basePath: null
 definitions:
+    LoginUser:
+        description: ""
+        properties:
+            mail:
+                type: string
+                description: ""
+            password:
+                type: string
+                description: ""
+        type: object
+        required:
+            - mail
+            - password
+    RegisterUser:
+        description: ""
+        properties:
+            name:
+                type: string
+                description: ""
+            lastName:
+                type: string
+                description: ""
+            alias:
+                type: string
+                description: ""
+            mail:
+                type: string
+                description: ""
+            password:
+                type: string
+                description: ""
+            userType:
+                type: number
+                format: double
+                description: ""
+        type: object
+        required:
+            - name
+            - lastName
+            - mail
+            - password
+            - userType
     DOMHighResTimeStamp:
         description: ""
         properties: {}
@@ -81,6 +123,48 @@ definitions:
             - BUBBLING_PHASE
             - CAPTURING_PHASE
             - NONE
+    NewEvent:
+        description: ""
+        properties:
+            title:
+                type: string
+                description: ""
+            place:
+                type: string
+                description: ""
+            address:
+                type: string
+                description: ""
+            date:
+                type: string
+                description: ""
+            time:
+                type: string
+                description: ""
+            description:
+                type: string
+                description: ""
+            userId:
+                type: number
+                format: double
+                description: ""
+            image:
+                type: string
+                description: ""
+            category:
+                type: string
+                description: ""
+        type: object
+        required:
+            - title
+            - place
+            - address
+            - date
+            - time
+            - description
+            - userId
+            - image
+            - category
     User:
         description: ""
         properties:
@@ -104,9 +188,14 @@ definitions:
                 type: string
                 description: ""
             userType:
-                type: string
+                type: number
+                format: double
                 description: ""
             active:
+                type: number
+                format: double
+                description: ""
+            role:
                 type: number
                 format: double
                 description: ""
@@ -119,6 +208,7 @@ definitions:
             - password
             - userType
             - active
+            - role
 info:
     description: 'Paradigm API.'
     license:
@@ -126,6 +216,50 @@ info:
     title: paradigm-api
     version: 1.0.0
 paths:
+    /api/auth/login:
+        post:
+            operationId: AuthLogin
+            produces:
+                - application/json
+            responses:
+                '200':
+                    description: Ok
+                    schema:
+                        type: object
+            description: ""
+            tags:
+                - Auth
+            consumes:
+                - application/json
+            parameters:
+                -
+                    description: ""
+                    in: body
+                    name: loginUser
+                    required: true
+                    schema:
+                        $ref: '#/definitions/LoginUser'
+    /api/auth/register:
+        post:
+            operationId: AuthRegister
+            produces:
+                - text/html
+            responses:
+                '204':
+                    description: 'No content'
+            description: ""
+            tags:
+                - Auth
+            consumes:
+                - application/json
+            parameters:
+                -
+                    description: ""
+                    in: body
+                    name: registerUser
+                    required: true
+                    schema:
+                        $ref: '#/definitions/RegisterUser'
     /api/events:
         get:
             operationId: EventsGet
@@ -168,16 +302,20 @@ paths:
             description: ""
             tags:
                 - Events
+            security:
+                -
+                    default:
+                        - x-auth
             consumes:
                 - application/json
             parameters:
                 -
                     description: ""
                     in: body
-                    name: event
+                    name: newEvent
                     required: true
                     schema:
-                        $ref: '#/definitions/Event'
+                        $ref: '#/definitions/NewEvent'
         put:
             operationId: EventsUpdate
             produces:
@@ -195,6 +333,10 @@ paths:
             description: ""
             tags:
                 - Events
+            security:
+                -
+                    default:
+                        - x-auth
             consumes:
                 - application/json
             parameters:
@@ -250,6 +392,10 @@ paths:
             description: ""
             tags:
                 - Events
+            security:
+                -
+                    default:
+                        - x-auth
             parameters:
                 -
                     description: ""
@@ -296,9 +442,7 @@ paths:
                 '200':
                     description: Ok
                     schema:
-                        type: array
-                        items:
-                            $ref: '#/definitions/Event'
+                        type: object
                 '404':
                     description: 'Category not found'
                     schema:
@@ -313,6 +457,29 @@ paths:
                     name: category
                     required: true
                     type: string
+    /api/events/featured:
+        get:
+            operationId: EventsGetFeaturedEvents
+            produces:
+                - text/html
+                - application/json
+            responses:
+                '200':
+                    description: Ok
+                    schema:
+                        type: object
+                '404':
+                    description: 'Featured events not found'
+                    schema:
+                        type: string
+                '500':
+                    description: 'Internal server error'
+                    schema:
+                        type: string
+            description: ""
+            tags:
+                - Events
+            parameters: []
     /api/health:
         get:
             operationId: HealthGet
@@ -335,9 +502,7 @@ paths:
                 '200':
                     description: Ok
                     schema:
-                        type: array
-                        items:
-                            $ref: '#/definitions/User'
+                        type: object
                 '500':
                     description: 'Internal server error'
                     schema:
@@ -345,6 +510,10 @@ paths:
             description: ""
             tags:
                 - Users
+            security:
+                -
+                    default:
+                        - x-auth
             parameters: []
         post:
             operationId: UsersPost
@@ -355,7 +524,7 @@ paths:
                 '200':
                     description: Ok
                     schema:
-                        $ref: '#/definitions/User'
+                        type: object
                 '201':
                     description: 'User created'
                     schema:
@@ -367,6 +536,10 @@ paths:
             description: ""
             tags:
                 - Users
+            security:
+                -
+                    default:
+                        - x-auth
             consumes:
                 - application/json
             parameters:
@@ -394,6 +567,10 @@ paths:
             description: ""
             tags:
                 - Users
+            security:
+                -
+                    default:
+                        - x-auth
             consumes:
                 - application/json
             parameters:
@@ -414,7 +591,7 @@ paths:
                 '200':
                     description: Ok
                     schema:
-                        $ref: '#/definitions/User'
+                        type: object
                 '404':
                     description: 'User not found'
                     schema:
@@ -422,6 +599,10 @@ paths:
             description: ""
             tags:
                 - Users
+            security:
+                -
+                    default:
+                        - x-auth
             parameters:
                 -
                     description: ""
@@ -447,6 +628,10 @@ paths:
             description: ""
             tags:
                 - Users
+            security:
+                -
+                    default:
+                        - x-auth
             parameters:
                 -
                     description: ""
@@ -457,7 +642,7 @@ paths:
                     format: double
 swagger: '2.0'
 securityDefinitions:
-    'client secret':
+    default:
         type: apiKey
         name: x-auth
         in: header

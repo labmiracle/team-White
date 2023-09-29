@@ -1,8 +1,4 @@
 import React from "react";
-import style from "../footer/footer.module.css";
-import logo from "../../assets/logoqph.png";
-import instagramLogo from "../../assets/insta 1.png";
-import twitterLogo from "../../assets/twitter 1.png";
 
 interface EventCompleteProps {
   // If you have any props to pass to the Footer component, define their types here.
@@ -20,7 +16,7 @@ const EventComplete: React.FC<EventCompleteProps> = () => {
 
         <section>
           <h2>Fecha del evento</h2>
-          
+
         </section>
 
         <section>
@@ -33,7 +29,7 @@ const EventComplete: React.FC<EventCompleteProps> = () => {
         <section>
           <h2>Descripción del evento</h2>
           <p>
-           
+
           </p>
         </section>
       </main>

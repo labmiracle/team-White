@@ -1,12 +1,9 @@
 
-export interface IUser {
-    id: number;
+export interface RegisterUser {
     name: string;
     lastName: string;
     alias?: string;
     mail: string;
     password: string;
     userType: number;
-    active: number;
-    role: number;
 }
