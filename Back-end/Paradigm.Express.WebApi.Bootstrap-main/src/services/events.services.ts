@@ -43,7 +43,7 @@ export class EventsServices {
 
     async validateUserId(token: string, userId: number): Promise<boolean> {
         try {
-            const decodedToken = jwt.decode(token) as { mail: string };
+            const decodedToken = jwt.decode(token) as { mail: string, id: number };
             const user = await this.usersRepo.findByMail(decodedToken.mail);
 
             if (user[0].id === userId) {

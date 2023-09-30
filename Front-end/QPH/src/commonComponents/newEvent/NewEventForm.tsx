@@ -4,6 +4,7 @@ import { NewEvent } from '../../models/new.event';
 import styles from './NewEventForm.module.css';
 
 function NewEventForm() {
+
     const [newEvent, setNewEvent] = useState<NewEvent>({
         title: "",
         place: "",
@@ -25,9 +26,12 @@ function NewEventForm() {
         e.preventDefault();
 
         try {
+            const token = localStorage.getItem('token');
+
             const response = await axios.post('http://localhost:5000/api/events', newEvent, {
                 headers: {
                     'Content-Type': 'application/json',
+                    'x-auth': `Bearer ${token}`,
                 },
             });
 

@@ -51,4 +51,11 @@ export class AuthServices {
 
         await this.repo.insertOne(newUser);
     }
+
+    async getUserId(mail: string): Promise<number> {
+
+        const users = await this.repo.find(" mail = ?", [mail]);
+
+        return users[0].id;
+    }
 }

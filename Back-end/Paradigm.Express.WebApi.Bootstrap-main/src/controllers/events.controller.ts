@@ -16,10 +16,9 @@ export class EventsController extends ApiController {
         super();
     }
 
-    @Security("x-auth")
     @GET
     @Response<string>(500, "Internal server error")
-    @Action({ route: "/", filters: [AuthFilter] })
+    @Action({ route: "/" })
     async get(): Promise<Event[] | undefined> {
         try {
             return this.repo.find(" active = ?", [1]);
@@ -114,7 +113,7 @@ export class EventsController extends ApiController {
     @POST
     @Response<Event>(201, "Event created")
     @Response<string>(500, "Internal server error")
-    @Action({ route: "/", fromBody: true })
+    @Action({ route: "/", fromBody: true, filters: [AuthFilter] })
     async post(newEvent: NewEvent): Promise<Event> {
         try {
 
@@ -139,7 +138,7 @@ export class EventsController extends ApiController {
     @PUT
     @Response<Event>(200, "Event updated correctly")
     @Response<string>(500, "Internal server error")
-    @Action({ route: "/", method: HttpMethod.PUT, fromBody: true })
+    @Action({ route: "/", method: HttpMethod.PUT, fromBody: true, filters: [AuthFilter] })
     async update(event: Event): Promise<Event | undefined> {
         try {
             const token = this.httpContext.request.headers['x-auth'] as string;
@@ -163,7 +162,7 @@ export class EventsController extends ApiController {
     @Response<Event>(200, "Event deleted correctly")
     @Response<string>(500, "Internal server error")
     @Path(":id")
-    @Action({ route: "/:id" })
+    @Action({ route: "/:id", filters: [AuthFilter] })
     async delete(@PathParam("id") id: number) {
         try {
             const event = await this.repo.getById(id);
