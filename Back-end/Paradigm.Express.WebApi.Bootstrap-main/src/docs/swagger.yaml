@@ -149,7 +149,7 @@ definitions:
                 format: double
                 description: ""
             image:
-                type: object
+                type: string
                 description: ""
             category:
                 type: string
@@ -278,6 +278,10 @@ paths:
             description: ""
             tags:
                 - Events
+            security:
+                -
+                    default:
+                        - x-auth
             parameters: []
         post:
             operationId: EventsPost
@@ -288,7 +292,7 @@ paths:
                 '200':
                     description: Ok
                     schema:
-                        type: object
+                        $ref: '#/definitions/Event'
                 '201':
                     description: 'Event created'
                     schema:

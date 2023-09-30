@@ -1,44 +1,18 @@
 import React, { useState } from 'react';
-import { useDropzone } from 'react-dropzone';
 import axios from 'axios';
-
-interface NewEvent {
-    title: string;
-    place: string;
-    address: string;
-    date: string;
-    time: string;
-    description: string;
-    userId: number;
-    image: File | null;
-    category: string;
-}
+import { NewEvent } from '../../models/new.event';
 
 function NewEventForm() {
     const [newEvent, setNewEvent] = useState<NewEvent>({
-        title: '',
-        place: '',
-        address: '',
-        date: '',
-        time: '',
-        description: '',
-        userId: 0,
-        image: null,
-        category: '',
-    });
-
-    const onDrop = (acceptedFiles: File[]) => {
-        const image = acceptedFiles[0];
-        setNewEvent({ ...newEvent, image });
-    };
-
-    const { getRootProps, getInputProps } = useDropzone({
-        onDrop,
-        accept: {
-            'image/png': ['.png'],
-            'image/jpeg': ['.jpeg', '.jpg'],
-        },
-        multiple: false, // Acepta solo una imagen
+        title: "",
+        place: "",
+        address: "",
+        date: "",
+        time: "",
+        description: "",
+        userId: 1,
+        image: "",
+        category: "",
     });
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -49,26 +23,10 @@ function NewEventForm() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        const formData = new FormData();
-
-        formData.append("title", newEvent.title);
-        formData.append("place", newEvent.place);
-        formData.append("address", newEvent.address);
-        formData.append("date", newEvent.date);
-        formData.append("time", newEvent.time);
-        formData.append("description", newEvent.description);
-        formData.append("userId", newEvent.userId.toString());
-        formData.append("category", newEvent.category);
-
-        if (newEvent.image) {
-            formData.append("image", newEvent.image);
-        }
-
         try {
-            const response = await axios.post('http://localhost:5000/api/events', formData, {
+            const response = await axios.post('http://localhost:5000/api/events', newEvent, {
                 headers: {
-                    'Content-Type': 'multipart/form-data',
-                    // JWT token
+                    'Content-Type': 'application/json',
                 },
             });
 
@@ -82,7 +40,7 @@ function NewEventForm() {
                 time: '',
                 description: '',
                 userId: 1,
-                image: null,
+                image: '',
                 category: '',
             });
 
@@ -127,16 +85,6 @@ function NewEventForm() {
                     />
                 </div>
                 <div>
-                    <label>Título:</label>
-                    <input
-                        type="text"
-                        name="title"
-                        value={newEvent.title}
-                        onChange={handleInputChange}
-                        required
-                    />
-                </div>
-                <div>
                     <label>Fecha:</label>
                     <input
                         type="text"
@@ -175,12 +123,6 @@ function NewEventForm() {
                         onChange={handleInputChange}
                         required
                     />
-                </div>
-
-                {/* Dropzone para la imagen */}
-                <div {...getRootProps()} className="dropzone">
-                    <input {...getInputProps()} />
-                    <p>Arrastra y suelta una imagen aquí o haz clic para seleccionar.</p>
                 </div>
 
                 <button type="submit">Crear Evento</button>

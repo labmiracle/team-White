@@ -191,7 +191,7 @@
 					"description": ""
 				},
 				"image": {
-					"type": "object",
+					"type": "string",
 					"description": ""
 				},
 				"category": {
@@ -368,6 +368,13 @@
 				"tags": [
 					"Events"
 				],
+				"security": [
+					{
+						"default": [
+							"x-auth"
+						]
+					}
+				],
 				"parameters": []
 			},
 			"post": {
@@ -380,7 +387,7 @@
 					"200": {
 						"description": "Ok",
 						"schema": {
-							"type": "object"
+							"$ref": "#/definitions/Event"
 						}
 					},
 					"201": {

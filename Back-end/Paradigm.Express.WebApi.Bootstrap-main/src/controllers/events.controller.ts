@@ -5,6 +5,8 @@ import { DELETE, GET, POST, PUT, Path, PathParam, Security } from "typescript-re
 import { Response, Tags } from "typescript-rest-swagger";
 import { NewEvent } from "./controllerModels/new.event";
 import { EventsServices } from "../services/events.services";
+import { Body } from "node-fetch";
+import { AuthFilter } from "../filters/auth.filter";
 
 @Path("/api/events")
 @Tags("Events")
@@ -14,9 +16,10 @@ export class EventsController extends ApiController {
         super();
     }
 
+    @Security("x-auth")
     @GET
     @Response<string>(500, "Internal server error")
-    @Action({ route: "/" })
+    @Action({ route: "/", filters: [AuthFilter] })
     async get(): Promise<Event[] | undefined> {
         try {
             return this.repo.find(" active = ?", [1]);
@@ -112,12 +115,20 @@ export class EventsController extends ApiController {
     @Response<Event>(201, "Event created")
     @Response<string>(500, "Internal server error")
     @Action({ route: "/", fromBody: true })
-    async post(newEvent: NewEvent): Promise<Event | undefined> {
+    async post(newEvent: NewEvent): Promise<Event> {
         try {
+
             const event = await this.service.insertNewEvent(newEvent);
+
+            if (!event) {
+                this.httpContext.response.status(500).send("Internal server error: error when creating the event");
+                return;
+            }
+
             this.httpContext.response.sendStatus(201);
-            return event;
+            return;
         } catch (error) {
+            console.log(error);
             this.httpContext.response.sendStatus(500);
             return;
         }

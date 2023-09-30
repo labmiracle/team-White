@@ -7,35 +7,16 @@ import jwt from "jsonwebtoken";
 import { UsersRepository } from "../repositories/users.repository";
 import path from "path";
 import fs from 'fs';
-import fileUpload, { UploadedFile } from 'express-fileupload';
+import multer from 'multer';
+import { Request } from 'express';
 
 @Injectable({ lifeTime: DependencyLifeTime.Scoped })
 export class EventsServices {
+
     constructor(private repo: EventsRepository, private usersRepo: UsersRepository) { }
 
     async insertNewEvent(newEvent: NewEvent): Promise<Event | null> {
         try {
-
-            if (!newEvent.image) {
-                return null;
-            }
-
-            const image = newEvent.image as unknown as UploadedFile;
-
-            const dirPath = path.join(__dirname, '..', 'uploads');
-            const imagePath = path.join(__dirname, '..', 'uploads', image.name);
-
-            // if 'uploads' folder doesn't exists, create it
-            if (!fs.existsSync(dirPath)) {
-                fs.mkdirSync(dirPath, { recursive: true });
-            }
-
-            image.mv(imagePath, (error) => {
-                if (error) {
-                    console.log('Error al guardar la imagen:', error);
-                    throw new Error("Internal server error: error when moving image");
-                }
-            });
 
             const event = new Event;
 
@@ -47,7 +28,7 @@ export class EventsServices {
             event.description = newEvent.description;
             event.active = 1;
             event.userId = newEvent.userId;
-            event.image = imagePath;
+            event.image = newEvent.image;
             event.category = newEvent.category;
             event.featured = null;
 
@@ -56,7 +37,7 @@ export class EventsServices {
 
             return event;
         } catch {
-            throw new Error;
+            throw new Error("Error at insertion of event");
         }
     }
 
