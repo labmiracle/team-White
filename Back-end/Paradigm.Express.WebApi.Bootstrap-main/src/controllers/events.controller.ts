@@ -17,7 +17,7 @@ export class EventsController extends ApiController {
     @GET
     @Response<string>(500, "Internal server error")
     @Action({ route: "/" })
-    async get(): Promise<Event[]> {
+    async get(): Promise<Event[] | undefined> {
         try {
             return this.repo.find(" active = ?", [1]);
         } catch (error) {
@@ -30,24 +30,38 @@ export class EventsController extends ApiController {
     @Response<string>(404, "Event not found")
     @Path(":id")
     @Action({ route: "/:id" })
-    async getOne(@PathParam("id") id: number): Promise<Event> {
+    async getOne(@PathParam("id") id: number): Promise<Event | undefined> {
         try {
-            return this.repo.getById(id);
+            const event = await this.repo.getById(id);
+
+            if (event) {
+                return event;
+            }
+
+            this.httpContext.response.status(404).send("Event not found");
+            return;
         } catch (error) {
-            this.httpContext.response.sendStatus(404);
+            this.httpContext.response.sendStatus(500);
             return;
         }
     }
 
     @GET
-    @Response<string>(404, "User not found")
+    @Response<string>(404, "Events and/or user not found")
     @Path("/user/:id")
     @Action({ route: "/user/:id" })
-    async getByUser(@PathParam("id") id: number): Promise<Event[]> {
+    async getByUser(@PathParam("id") id: number): Promise<Event[] | undefined> {
         try {
-            return this.repo.find(" userId = ? AND active = ?", [id, 1]);
+            const events = await this.repo.find(" userId = ? AND active = ?", [id, 1]);
+
+            if (events.length !== 0) {
+                return events;
+            }
+
+            this.httpContext.response.status(404).send("Events and/or user not found")
+            return;
         } catch (error) {
-            this.httpContext.response.sendStatus(404);
+            this.httpContext.response.sendStatus(500);
             return;
         }
     }
@@ -58,9 +72,16 @@ export class EventsController extends ApiController {
     @Action({ route: "/category/:category" })
     async getByCategory(@PathParam("category") category: string): Promise<Event[] | undefined> {
         try {
-            return this.repo.find(" category = ? AND active = ?", [category, 1]);
+            const events = await this.repo.find(" category = ? AND active = ?", [category, 1]);
+
+            if (events.length !== 0) {
+                return events;
+            }
+
+            this.httpContext.response.status(404).send("Events and/or category not found")
+            return;
         } catch (error) {
-            this.httpContext.response.sendStatus(404);
+            this.httpContext.response.sendStatus(500);
             return;
         }
     }
@@ -73,12 +94,13 @@ export class EventsController extends ApiController {
     async getFeaturedEvents(): Promise<Event[] | undefined> {
         try {
             const events = await this.repo.find(" featured = ? AND active = ?", [1, 1]);
-            if (events.length === 0) {
-                this.httpContext.response.sendStatus(404);
-                return;
+
+            if (events.length !== 0) {
+                return events;
             }
 
-            return events;
+            this.httpContext.response.sendStatus(404);
+            return;
         } catch {
             this.httpContext.response.sendStatus(500);
             return;
@@ -90,7 +112,7 @@ export class EventsController extends ApiController {
     @Response<Event>(201, "Event created")
     @Response<string>(500, "Internal server error")
     @Action({ route: "/", fromBody: true })
-    async post(newEvent: NewEvent): Promise<Event> {
+    async post(newEvent: NewEvent): Promise<Event | undefined> {
         try {
             const event = await this.service.insertNewEvent(newEvent);
             this.httpContext.response.sendStatus(201);
@@ -100,6 +122,7 @@ export class EventsController extends ApiController {
             return;
         }
     }
+
 
     @Security("x-auth")
     @PUT

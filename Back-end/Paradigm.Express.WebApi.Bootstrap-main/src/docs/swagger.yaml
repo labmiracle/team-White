@@ -149,7 +149,7 @@ definitions:
                 format: double
                 description: ""
             image:
-                type: string
+                type: object
                 description: ""
             category:
                 type: string
@@ -270,9 +270,7 @@ paths:
                 '200':
                     description: Ok
                     schema:
-                        type: array
-                        items:
-                            $ref: '#/definitions/Event'
+                        type: object
                 '500':
                     description: 'Internal server error'
                     schema:
@@ -290,7 +288,7 @@ paths:
                 '200':
                     description: Ok
                     schema:
-                        $ref: '#/definitions/Event'
+                        type: object
                 '201':
                     description: 'Event created'
                     schema:
@@ -357,7 +355,7 @@ paths:
                 '200':
                     description: Ok
                     schema:
-                        $ref: '#/definitions/Event'
+                        type: object
                 '404':
                     description: 'Event not found'
                     schema:
@@ -414,11 +412,9 @@ paths:
                 '200':
                     description: Ok
                     schema:
-                        type: array
-                        items:
-                            $ref: '#/definitions/Event'
+                        type: object
                 '404':
-                    description: 'User not found'
+                    description: 'Events and/or user not found'
                     schema:
                         type: string
             description: ""

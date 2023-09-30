@@ -7,6 +7,6 @@ export interface NewEvent {
     time: string;
     description: string;
     userId: number;
-    image: string;
+    image: File | null;
     category: string;
 }
