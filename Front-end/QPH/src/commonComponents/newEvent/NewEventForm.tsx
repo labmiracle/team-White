@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { NewEvent } from '../../models/new.event';
+import styles from './NewEventForm.module.css';
 
 function NewEventForm() {
     const [newEvent, setNewEvent] = useState<NewEvent>({
@@ -50,83 +51,85 @@ function NewEventForm() {
     };
 
     return (
-        <div>
+        <div className={styles.container}>
             <h2>Crear Nuevo Evento</h2>
-            <form onSubmit={handleSubmit}>
-                {/* Título */}
-                <div>
-                    <label>Título:</label>
-                    <input
-                        type="text"
-                        name="title"
-                        value={newEvent.title}
-                        onChange={handleInputChange}
-                        required
-                    />
-                </div>
-                <div>
-                    <label>Lugar:</label>
-                    <input
-                        type="text"
-                        name="place"
-                        value={newEvent.place}
-                        onChange={handleInputChange}
-                        required
-                    />
-                </div>
-                <div>
-                    <label>Dirección:</label>
-                    <input
-                        type="text"
-                        name="address"
-                        value={newEvent.address}
-                        onChange={handleInputChange}
-                        required
-                    />
-                </div>
-                <div>
-                    <label>Fecha:</label>
-                    <input
-                        type="text"
-                        name="date"
-                        value={newEvent.date}
-                        onChange={handleInputChange}
-                        required
-                    />
-                </div>
-                <div>
-                    <label>Hora:</label>
-                    <input
-                        type="text"
-                        name="time"
-                        value={newEvent.time}
-                        onChange={handleInputChange}
-                        required
-                    />
-                </div>
-                <div>
-                    <label>Descripción:</label>
-                    <input
-                        type="text"
-                        name="description"
-                        value={newEvent.description}
-                        onChange={handleInputChange}
-                        required
-                    />
-                </div>
-                <div>
-                    <label>Categoría:</label>
-                    <input
-                        type="text"
-                        name="category"
-                        value={newEvent.category}
-                        onChange={handleInputChange}
-                        required
-                    />
-                </div>
+            <div className={styles.formContainer}>
+                <form onSubmit={handleSubmit} className={styles.form}>
+                    {/* Título */}
+                    <div>
+                        <label className={styles.label}>Título: </label>
+                        <input
+                            type="text"
+                            name="title"
+                            value={newEvent.title}
+                            onChange={handleInputChange}
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label className={styles.label}>Lugar: </label>
+                        <input
+                            type="text"
+                            name="place"
+                            value={newEvent.place}
+                            onChange={handleInputChange}
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label className={styles.label}>Dirección: </label>
+                        <input
+                            type="text"
+                            name="address"
+                            value={newEvent.address}
+                            onChange={handleInputChange}
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label className={styles.label}>Fecha: </label>
+                        <input
+                            type="text"
+                            name="date"
+                            value={newEvent.date}
+                            onChange={handleInputChange}
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label className={styles.label}>Hora: </label>
+                        <input
+                            type="text"
+                            name="time"
+                            value={newEvent.time}
+                            onChange={handleInputChange}
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label className={styles.label}>Descripción: </label>
+                        <input
+                            type="text"
+                            name="description"
+                            value={newEvent.description}
+                            onChange={handleInputChange}
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label className={styles.label}>Categoría: </label>
+                        <input
+                            type="text"
+                            name="category"
+                            value={newEvent.category}
+                            onChange={handleInputChange}
+                            required
+                        />
+                    </div>
 
-                <button type="submit">Crear Evento</button>
-            </form>
+                    <button type="submit">Crear Evento</button>
+                </form>
+            </div>
         </div>
     );
 }
