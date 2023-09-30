@@ -24,7 +24,7 @@ const Login = () => {
       console.log('Response:', response.data);
       // Assuming your server responds with a JWT token.
       // const { token } = response.data;
-      //window.location.href = '/main';
+      window.location.href = '/main';
     } catch (error) {
       console.error('Login failed:', error);
       setError('Algo anda mal por favor revisa el e-mail o la contraseña');

@@ -1,0 +1,135 @@
+.loginContainer{
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    justify-content: space-around;
+    align-items: center;
+    width: 500px;
+    margin-right: 100px;
+    height: 500px;
+    
+}
+
+.imgContainer img{
+    height: 500px;
+}
+.evenContainer{
+    padding-top: 20px;
+    width: 90vw;
+    height: 40%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+
+}
+.formInput{
+    text-align: left;
+    padding-left: 15px;
+    color: #FFA41B;
+    border: solid #FFA41B;
+    width: 80%;
+    height: 48px;
+    border-radius: 48px;
+}
+.form{
+    border: solid #000000 1px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.formParagraph{
+    font-size: 28px;
+    color: #525FE1
+}
+.btnCreate{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.loginBtn{
+    width: 150px;
+    height: 48px;
+    border-radius: 25px;
+    color: #fff;
+    background-color: #525fe1;
+    font-size: 18px;
+}
+
+.userType{
+    display: flex;
+    justify-content: space-between;
+    width: 38%;
+    align-items: center;
+    font-size: 18px;
+}
+
+
+
+/* 
+.formCOntainner form:hover{
+    border: solid #525FE1;
+    
+}
+
+
+
+.formCOntainner{
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;    
+    justify-content: space-around;
+    align-items: center;
+    width: 500px;
+    margin-right: 100px;
+}
+
+.formCOntainner form{
+    border: solid #000000 1px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    align-items:center;
+    flex-wrap: wrap;
+    
+}
+.formCOntainner form p{
+    font-size: 28px;
+    color: #525FE1;
+}
+/* .formCOntainner form input{
+    
+
+} */
+/* .formCOntainner form input{
+    text-align: left;
+    padding-left: 15px;
+    color: #FFA41B;
+    border: solid #FFA41B;
+    width: 80%;
+    height: 48px;
+    border-radius: 48px;
+}
+
+
+.formCOntainner form *{
+    margin: 15px;
+    }
+.loginbtn{
+    width: 176px;
+    height: 50px;
+    border-radius: 49px;
+    background-color: #525FE1;
+    color: #fff;
+    font-size: 24px;
+}
+
+/*Register stylesheet*/
+
+
