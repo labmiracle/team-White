@@ -50,7 +50,7 @@ const Login = () => {
             <div className={style.loginRegister}>
               <input type="submit" value="Ingresar" id="login" className={style.loginbtn} onClick={handleSubmit} />
               <Link to="/registrar">Register </Link>
-              {error && <p className={style.errorMessage}>{error}</p>}
+              {<h6 className={style.errorMessage}>{error}</h6>}
             </div>
           </form>
         </div>

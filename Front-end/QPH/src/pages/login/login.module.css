@@ -83,3 +83,8 @@
     width: 80%;
     align-items: center;
 }
+
+.errorMessage{
+    font-size: 10px;
+    color: red;
+}
