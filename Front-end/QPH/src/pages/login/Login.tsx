@@ -1,9 +1,8 @@
 import style from "./login.module.css";
 import loginconcertimg from "../../assets/Concert-login.png";
-// import Nav from "../../commonComponents/nav/Nav";
 import { useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 
@@ -11,6 +10,7 @@ const Login = () => {
   const [mail, setMail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -30,6 +30,8 @@ const Login = () => {
 
       localStorage.setItem('token', token);
 
+      navigate("/");
+
     } catch (error) {
       setError('Algo anda mal por favor revisa el e-mail o la contraseña');
     }
@@ -46,10 +48,10 @@ const Login = () => {
             <input type="text" placeholder="tucorreo@gmail.com" name="mail" id="mail" value={mail} onChange={(e) => setMail(e.target.value)} />
             <input type="password" placeholder="password" name="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} />
             <div className={style.loginRegister}>
-            <input type="submit" value="Ingresar" id="login" className={style.loginbtn} onClick={handleSubmit} />
-            <Link to="/registrar">Register </Link>
-            {error && <p className={style.errorMessage}>{error}</p>}
-          </div>
+              <input type="submit" value="Ingresar" id="login" className={style.loginbtn} onClick={handleSubmit} />
+              <Link to="/registrar">Register </Link>
+              {error && <p className={style.errorMessage}>{error}</p>}
+            </div>
           </form>
         </div>
         <div className="">
