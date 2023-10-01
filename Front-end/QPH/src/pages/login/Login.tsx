@@ -3,6 +3,7 @@ import loginconcertimg from "../../assets/Concert-login.png";
 import Nav from "../../commonComponents/nav/Nav";
 import { useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 
 
@@ -44,9 +45,11 @@ const Login = () => {
             <p>Ingresar</p>
             <input type="text" placeholder="tucorreo@gmail.com" name="mail" id="mail" value={mail} onChange={(e) => setMail(e.target.value)} />
             <input type="password" placeholder="password" name="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+            <div className={style.loginRegister}>
             <input type="submit" value="Ingresar" id="login" className={style.loginbtn} onClick={handleSubmit} />
+            <Link to="/registrar">Register </Link>
             {error && <p className={style.errorMessage}>{error}</p>}
-
+          </div>
           </form>
         </div>
         <div className="">

@@ -26,13 +26,20 @@ const Nav: React.FC = () => {
               <li className={style.listItem}>
                 <Link className={style.link}  to="/gastronomy">Gastronomía</Link>
               </li>
-              <li className={style.listItem}>
+              {/* <li className={style.listItem}> */}
                 {/* <Link className={style.link}  to="/filtrar">Filtrar</Link> */}
-                Filtrar
-              </li>
+                {/* Filtrar */}
+              {/* </li> */}
               <li className={style.listItem}>
                 { <Link className={style.link}  to="/login">Conectar</Link>}
-                Mi Cuenta
+              </li>
+              <li className={style.listItem}>
+                { <Link className={style.link}  to="/login">Mi Cuenta</Link>}
+                
+              </li>
+              <li className={style.listItem}>
+                { <Link className={style.link}  to="/crear-evento">crear Evento</Link>}
+               
               </li>
             </ul>
           </div>

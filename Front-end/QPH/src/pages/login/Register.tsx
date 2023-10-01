@@ -3,6 +3,7 @@ import loginconcertimg from "../../assets/Concert-login.png";
 import Nav from "../../commonComponents/nav/Nav";
 import { useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const Register = () => {
   const [name, setName] = useState('');
@@ -39,7 +40,7 @@ const Register = () => {
       <div className={style.evenContainer}>
         <div className={style.loginContainer}>
           <form className ={style.form} onSubmit={handleRegister}>
-            <p className={style.formParagraph}>Ingresar</p>
+            <p className={style.formParagraph}>Crear cuenta</p>
             <input className={style.formInput}type="text" placeholder="tucorreo@gmail.com" name="email" id="email" value={mail} onChange={(e) => setEmail(e.target.value)} />
            
               <input className={style.formInput} type="text" placeholder="Tu nombre" name="name" id="name" value={name} onChange={(e) => setName(e.target.value)} />
@@ -53,7 +54,7 @@ const Register = () => {
             {userType ? ( <input className={style.formInput} type="text" placeholder="alias" name="alias" id="alias" value={alias} onChange={(e) => setAlias(e.target.value)}/>) : ""}        
             <div className={style.btnCreate}>
               <input className={style.loginBtn} type="submit" value="Crear Cuenta" id="login"/>
-              <input className={style.loginBtn} type="button" value="Conectar" id="login"/>
+              <Link to="/login"><input className={style.loginBtn} type="button" value="Conectar" id="login"/></Link>
              
             </div>
           </form>

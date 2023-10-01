@@ -77,3 +77,9 @@
 .organizationType{
     display: flex;
    }
+
+.loginRegister{
+    display: flex;
+    width: 80%;
+    align-items: center;
+}

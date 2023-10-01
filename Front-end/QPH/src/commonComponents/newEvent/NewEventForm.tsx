@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { NewEvent } from '../../models/new.event';
-import styles from './NewEventForm.module.css';
+import style from './NewEventForm.module.css';
 import jwt_decode from "jwt-decode";
+import createEvent from "../../assets/Concert-login.png"
 
 function NewEventForm() {
 
@@ -73,13 +74,15 @@ function NewEventForm() {
     };
 
     return (
-        <div className={styles.container}>
-            <h2>Crear Nuevo Evento</h2>
-            <div className={styles.formContainer}>
-                <form onSubmit={handleSubmit} className={styles.form}>
-                    <div>
-                        <label className={styles.label}>Título: </label>
+        <div className={style.container}>
+           
+            <div className ={style.formContainer}>
+                 <h2 className={style.formTitle}>Crear Nuevo Evento</h2>
+                <form className={style.form} onSubmit={handleSubmit}>
+                    <div className={style.divForm}>
+                        <label className={style.inputLabel}>Título: </label>
                         <input
+                        className={style.formInput}
                             type="text"
                             name="title"
                             value={newEvent.title}
@@ -87,9 +90,10 @@ function NewEventForm() {
                             required
                         />
                     </div>
-                    <div>
-                        <label className={styles.label}>Lugar: </label>
+                    <div className={style.divForm}>
+                        <label className={style.inputLabel}>Lugar: </label>
                         <input
+                            className={style.formInput}
                             type="text"
                             name="place"
                             value={newEvent.place}
@@ -97,9 +101,10 @@ function NewEventForm() {
                             required
                         />
                     </div>
-                    <div>
-                        <label className={styles.label}>Dirección: </label>
+                    <div className={style.divForm}>
+                        <label className={style.inputLabel}>Dirección: </label>
                         <input
+                            className={style.formInput}
                             type="text"
                             name="address"
                             value={newEvent.address}
@@ -107,9 +112,10 @@ function NewEventForm() {
                             required
                         />
                     </div>
-                    <div>
-                        <label className={styles.label}>Fecha: </label>
+                    <div className={style.divForm}>
+                        <label className={style.inputLabel}>Fecha: </label>
                         <input
+                            className={style.formInput}
                             type="text"
                             name="date"
                             value={newEvent.date}
@@ -117,9 +123,10 @@ function NewEventForm() {
                             required
                         />
                     </div>
-                    <div>
-                        <label className={styles.label}>Hora: </label>
+                    <div className={style.divForm}>
+                        <label className={style.inputLabel}>Hora: </label>
                         <input
+                            className={style.formInput}
                             type="text"
                             name="time"
                             value={newEvent.time}
@@ -127,9 +134,11 @@ function NewEventForm() {
                             required
                         />
                     </div>
-                    <div>
-                        <label className={styles.label}>Descripción: </label>
+                    <div className={style.divForm}>
+                        <label className={style.inputLabel}>Descripción: </label>
                         <input
+                            
+                            className={style.formInput}
                             type="text"
                             name="description"
                             value={newEvent.description}
@@ -137,9 +146,10 @@ function NewEventForm() {
                             required
                         />
                     </div>
-                    <div>
-                        <label className={styles.label}>Categoría: </label>
+                    <div className={style.divForm}>
+                        <label className={style.inputLabel}>Categoría: </label>
                         <input
+                            className={style.formInput}
                             type="text"
                             name="category"
                             value={newEvent.category}
@@ -147,12 +157,14 @@ function NewEventForm() {
                             required
                         />
                     </div>
-
-                    <button type="submit">Crear Evento</button>
-
-                    {error && <div className={styles.error}>{error}</div>}
+                    <button className={style.createbtn}   type="submit">Crear Evento</button>
+                    {error && <div className={style.error}>{error}</div>}
                 </form>
             </div>
+            <div>
+                <img src={createEvent} alt="registrar evento" width={500} height={500}/>
+            </div>
+
         </div>
     );
 }
