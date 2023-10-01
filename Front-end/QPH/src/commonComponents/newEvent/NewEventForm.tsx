@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { NewEvent } from '../../models/new.event';
 import styles from './NewEventForm.module.css';
+import jwt_decode from "jwt-decode";
 
 function NewEventForm() {
 
@@ -17,6 +18,8 @@ function NewEventForm() {
         category: "",
     });
 
+    const [error, setError] = useState<string | null>(null);
+
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setNewEvent({ ...newEvent, [name]: value });
@@ -28,10 +31,23 @@ function NewEventForm() {
         try {
             const token = localStorage.getItem('token');
 
-            const response = await axios.post('http://localhost:5000/api/events', newEvent, {
+            if (!token) {
+                setError('Debes iniciar sesión para crear un evento');
+                return;
+            }
+
+            const decoded = jwt_decode(token) as { mail: string, id: number };
+
+            console.log(decoded.id);
+
+            const updatedEvent = { ...newEvent, userId: decoded.id };
+
+            console.log(updatedEvent);
+
+            const response = await axios.post('http://localhost:5000/api/events', updatedEvent, {
                 headers: {
                     'Content-Type': 'application/json',
-                    'x-auth': `Bearer ${token}`,
+                    'x-auth': `${token}`,
                 },
             });
 
@@ -49,6 +65,8 @@ function NewEventForm() {
                 category: '',
             });
 
+            setError(null);
+
         } catch (error) {
             console.error('Error al crear el evento:', error);
         }
@@ -59,7 +77,6 @@ function NewEventForm() {
             <h2>Crear Nuevo Evento</h2>
             <div className={styles.formContainer}>
                 <form onSubmit={handleSubmit} className={styles.form}>
-                    {/* Título */}
                     <div>
                         <label className={styles.label}>Título: </label>
                         <input
@@ -132,6 +149,8 @@ function NewEventForm() {
                     </div>
 
                     <button type="submit">Crear Evento</button>
+
+                    {error && <div className={styles.error}>{error}</div>}
                 </form>
             </div>
         </div>

@@ -15,7 +15,7 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      console.log(mail, password);
+
       const response = await axios.post("http://localhost:5000/api/auth/login", {
         mail: mail,
         password: password,
@@ -26,8 +26,6 @@ const Login = () => {
       if (token) {
         localStorage.setItem('token', token);
       }
-
-      // Assuming your server responds with a JWT token.
       // const { token } = response.data;
       //window.location.href = '/main';
     } catch (error) {
