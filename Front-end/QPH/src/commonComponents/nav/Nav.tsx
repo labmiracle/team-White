@@ -50,12 +50,7 @@ const Nav: React.FC = () => {
   </>
 )}
 
-
-
-             
-              
-              
-            </ul>
+</ul>
           </div>
         </div>
       </nav>
