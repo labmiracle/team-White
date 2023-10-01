@@ -4,6 +4,10 @@ import style from "../nav/nav.module.css";
 import logoqph from "../../assets/logoqph.png"; 
 
 const Nav: React.FC = () => {
+
+  let istoken= localStorage.getItem("token")
+
+
   return (
     <>
       <nav>
@@ -26,16 +30,17 @@ const Nav: React.FC = () => {
               <li className={style.listItem}>
                 <Link className={style.link}  to="/gastronomy">Gastronomía</Link>
               </li>
-              <li className={style.listItem}>
-              { <Link className={style.link}  to="/login">Conectar</Link>}
-              </li>
-              <li className={style.listItem}>
-                { <Link className={style.link}  to="/login">Mi Cuenta</Link>}
-                
-              </li>
-              <li className={style.listItem}>
-                { <Link className={style.link}  to="/crear-evento">crear Evento</Link>}               
-              </li>
+              {istoken ? (
+  <li className={style.listItem}>
+    <Link className={style.link} to="/crear-evento">Crear Evento</Link>
+  </li>
+) : (
+  <li className={style.listItem}>
+    <Link className={style.link} to="/login">Conectar</Link>
+  </li>
+)}             
+              
+              
             </ul>
           </div>
         </div>
