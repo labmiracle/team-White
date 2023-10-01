@@ -1,6 +1,6 @@
 import style from "./login.module.css";
 import loginconcertimg from "../../assets/Concert-login.png";
-import Nav from "../../commonComponents/nav/Nav";
+// import Nav from "../../commonComponents/nav/Nav";
 import { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
@@ -38,7 +38,7 @@ const Login = () => {
   return (
 
     <div className={""}>
-      <Nav />
+      {/* <Nav /> */}
       <div className={style.loginContainer}>
         <div className={style.formCOntainner}>
           <form className={`${style.formContainer} form`} action="" method="post">

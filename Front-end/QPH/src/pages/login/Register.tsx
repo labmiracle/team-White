@@ -1,6 +1,6 @@
 import style from "./register.module.css";
 import loginconcertimg from "../../assets/Concert-login.png";
-import Nav from "../../commonComponents/nav/Nav";
+// import Nav from "../../commonComponents/nav/Nav";
 import { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
@@ -35,8 +35,8 @@ const Register = () => {
   }
  
   return (
-    <div className="">
-      <Nav />
+    <div className={style.superContainer}>
+      {/* <Nav /> */}
       <div className={style.evenContainer}>
         <div className={style.loginContainer}>
           <form className ={style.form} onSubmit={handleRegister}>

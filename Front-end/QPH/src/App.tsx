@@ -7,13 +7,17 @@ import Login from "./pages/login/Login";
 import Register from "./pages/login/Register";
 import NewEventForm from "./commonComponents/newEvent/NewEventForm";
 import ProtectedRoutes from "./router/protectedRoute/ProtectedRoutes";
+import Nav from "./commonComponents/nav/Nav";
+import Footer from "./commonComponents/footer/Footer";
 
 function App() {
 
   return (
     <div className="App">
+     
 
       <BrowserRouter>
+      <Nav />
       <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/registrar" element={<Register />}/>
@@ -26,9 +30,9 @@ function App() {
 
          <Route element ={<ProtectedRoutes/>}>
          <Route path="/crear-evento" element={<NewEventForm />} />
-         </Route>
-         
+         </Route>         
       </Routes>
+      <Footer/>
       </BrowserRouter>
       
     </div>
