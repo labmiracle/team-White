@@ -1,11 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
-.container{
+.container {
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
+    margin-top: 40px;
 }
 
-.formContainer{
+.formContainer {
     display: flex;
     flex-direction: column;
     background-color: #fff;
@@ -14,18 +15,23 @@
     width: 500px;
     margin-right: 100px;
     height: 500px;
+    font-family: 'Poppins', sans-serif;
 }
-.formInput{
+
+.formInput {
     text-align: left;
     padding-left: 15px;
-    color: #FFA41B;
+    color: #000000;
     border: solid #FFA41B;
     width: 70%;
     height: 48px;
     border-radius: 48px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 15px;
 }
 
-.form{
+.form {
     border: solid #000000 1px;
     display: flex;
     flex-direction: column;
@@ -35,7 +41,8 @@
     align-items: center;
     flex-wrap: wrap;
 }
-.divForm{
+
+.divForm {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -43,16 +50,18 @@
     width: 100%;
 }
 
-.inputLabel{
-    font-size: 28px;
-    color: #525FE1
+.inputLabel {
+    font-size: 22px;
+    color: #525FE1;
+    font-weight: 600;
 }
-.formTitle{
+
+.formTitle {
     font-size: 28px;
     color: #525FE1
 }
 
-.createbtn{
+.createbtn {
     /* padding-left: 15px; */
     color: #FFA41B;
     border: solid #FFA41B;
@@ -60,4 +69,7 @@
     height: 48px;
     border-radius: 48px;
     background-color: #525FE1;
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
 }
