@@ -30,8 +30,8 @@ export class EventsController extends ApiController {
 
     @GET
     @Response<string>(404, "Event not found")
-    @Path(":id")
-    @Action({ route: "/:id" })
+    @Path("/event/:id")
+    @Action({ route: "/event/:id" })
     async getOne(@PathParam("id") id: number): Promise<Event | undefined> {
         try {
             const event = await this.repo.getById(id);
