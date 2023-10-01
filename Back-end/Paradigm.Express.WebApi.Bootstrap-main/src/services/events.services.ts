@@ -31,6 +31,7 @@ export class EventsServices {
             event.image = newEvent.image;
             event.category = newEvent.category;
             event.featured = null;
+            event.organizedBy = newEvent.organizedBy;
 
             const metadata: InsertionResult<number> = await this.repo.insertOne(event);
             event.id = metadata.insertId;

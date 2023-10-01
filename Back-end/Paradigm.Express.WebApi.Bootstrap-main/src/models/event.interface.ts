@@ -12,4 +12,5 @@ export interface IEvent {
     image: string;
     category: string;
     featured?: number | null;
+    organizedBy: string;
 }
