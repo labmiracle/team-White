@@ -5,7 +5,7 @@ import logoqph from "../../assets/logoqph.png";
 
 const Nav: React.FC = () => {
 
-  let istoken= localStorage.getItem("token")
+  let isToken= localStorage.getItem("token")
 
 
   return (
@@ -30,15 +30,29 @@ const Nav: React.FC = () => {
               <li className={style.listItem}>
                 <Link className={style.link}  to="/gastronomy">Gastronomía</Link>
               </li>
-              {istoken ? (
-  <li className={style.listItem}>
-    <Link className={style.link} to="/crear-evento">Crear Evento</Link>
-  </li>
-) : (
+              {isToken ? (
+  <>
+    <li className={style.listItem}>
+      <Link className={style.link} to="/crear-evento">Crear Evento</Link>
+    </li>
+    <li className={style.listItem}>
+      <Link className={style.link} to="/login">Mi Cuenta</Link>
+    </li>
+  </>
+) : ( 
+  <>
   <li className={style.listItem}>
     <Link className={style.link} to="/login">Conectar</Link>
   </li>
-)}             
+  <li className={style.listItem}>
+    <Link className={style.link} to="/registrar">Registrar</Link>
+  </li>
+  </>
+)}
+
+
+
+             
               
               
             </ul>
