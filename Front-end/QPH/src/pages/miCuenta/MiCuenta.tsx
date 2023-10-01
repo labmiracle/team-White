@@ -4,7 +4,6 @@ import jwt_decode from 'jwt-decode';
 import { HomeEvent } from "../../models/home.event";
 import { ServerEvent } from "../../models/server.event";
 import { EventGrid } from "../../commonComponents/eventGrid/EventGrid";
-import Nav from "../../commonComponents/nav/Nav";
 import Footer from "../../commonComponents/footer/Footer";
 
 const MiCuenta = () => {
@@ -58,8 +57,7 @@ const MiCuenta = () => {
 
   return (
     <>
-      <Nav />
-      <div>MiCuenta</div>
+      <div>Mis eventos</div>
       {error && <div>{error}</div>}
       <EventGrid events={events} />
       <Footer />
