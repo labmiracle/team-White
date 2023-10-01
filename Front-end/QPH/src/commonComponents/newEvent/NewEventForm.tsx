@@ -13,9 +13,10 @@ function NewEventForm() {
         date: "",
         time: "",
         description: "",
-        userId: 1,
+        userId: 0,
         image: "",
         category: "",
+        organizedBy: "",
     });
 
     const [error, setError] = useState<string | null>(null);
@@ -36,11 +37,11 @@ function NewEventForm() {
                 return;
             }
 
-            const decoded = jwt_decode(token) as { mail: string, id: number };
+            const decoded = jwt_decode(token) as { mail: string, id: number, alias: string };
 
-            console.log(decoded.id);
+            console.log(decoded);
 
-            const updatedEvent = { ...newEvent, userId: decoded.id };
+            const updatedEvent = { ...newEvent, userId: decoded.id, organizedBy: decoded.alias };
 
             console.log(updatedEvent);
 
@@ -60,9 +61,10 @@ function NewEventForm() {
                 date: '',
                 time: '',
                 description: '',
-                userId: 1,
+                userId: 0,
                 image: '',
                 category: '',
+                organizedBy: '',
             });
 
             setError(null);

@@ -9,4 +9,5 @@ export interface NewEvent {
     userId: number;
     image: string;
     category: string;
+    organizedBy: string;
 }

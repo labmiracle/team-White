@@ -29,8 +29,9 @@ export class AuthController extends ApiController {
             if (valid) {
 
                 const userId = await this.service.getUserId(loginUser.mail);
+                const alias = await this.service.getUserAlias(loginUser.mail);
 
-                const token = jwt.sign({ mail: loginUser.mail, id: userId }, this.config.jwtSecret);
+                const token = jwt.sign({ mail: loginUser.mail, id: userId, alias: alias }, this.config.jwtSecret);
 
                 return token;
             }

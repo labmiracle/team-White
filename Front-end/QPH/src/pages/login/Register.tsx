@@ -23,7 +23,7 @@ const Register = () => {
         mail: mail,
         password: password,
         userType: userType,
-       
+
       });
 
       // Handle the response as needed
@@ -32,29 +32,29 @@ const Register = () => {
       console.error("Error during registration:", error);
     }
   }
- 
+
   return (
     <div className="">
       <Nav />
       <div className={style.evenContainer}>
         <div className={style.loginContainer}>
-          <form className ={style.form} onSubmit={handleRegister}>
-            <p className={style.formParagraph}>Ingresar</p>
-            <input className={style.formInput}type="text" placeholder="tucorreo@gmail.com" name="email" id="email" value={mail} onChange={(e) => setEmail(e.target.value)} />
-           
-              <input className={style.formInput} type="text" placeholder="Tu nombre" name="name" id="name" value={name} onChange={(e) => setName(e.target.value)} />
-              <input className={style.formInput} type="text" placeholder="Tu apellido" name="lastName" id="lastName" value={lastName} onChange={(e) => setLastName(e.target.value)}/>
-           
+          <form className={style.form} onSubmit={handleRegister}>
+            <p className={style.formParagraph}>Registrarme</p>
+            <input className={style.formInput} type="text" placeholder="tucorreo@gmail.com" name="email" id="email" value={mail} onChange={(e) => setEmail(e.target.value)} />
+
+            <input className={style.formInput} type="text" placeholder="Tu nombre" name="name" id="name" value={name} onChange={(e) => setName(e.target.value)} />
+            <input className={style.formInput} type="text" placeholder="Tu apellido" name="lastName" id="lastName" value={lastName} onChange={(e) => setLastName(e.target.value)} />
+
             <input className={style.formInput} type="text" placeholder="password" name="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} />
             <div className={style.userType}>
-              <span>Soy una organización</span>              
+              <span>Soy una organización</span>
               <input type="checkbox" name="userType" id="artist" checked={userType} onChange={(e) => setUserType(e.target.checked)} />
-            </div> 
-            {userType ? ( <input className={style.formInput} type="text" placeholder="alias" name="alias" id="alias" value={alias} onChange={(e) => setAlias(e.target.value)}/>) : ""}        
+            </div>
+            <input className={style.formInput} type="text" placeholder="alias" name="alias" id="alias" value={alias} onChange={(e) => setAlias(e.target.value)} />
             <div className={style.btnCreate}>
-              <input className={style.loginBtn} type="submit" value="Crear Cuenta" id="login"/>
-              <input className={style.loginBtn} type="button" value="Conectar" id="login"/>
-             
+              <input className={style.loginBtn} type="submit" value="Crear Cuenta" id="login" />
+              <input className={style.loginBtn} type="button" value="Conectar" id="login" />
+
             </div>
           </form>
         </div>
