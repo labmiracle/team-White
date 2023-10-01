@@ -1,15 +1,37 @@
 import { CategoryTag } from "./CategoryTag";
 import styles from "./styles/EventCard.module.css";
 import { EventCardProps } from "../../types";
+import event1 from './../../assets/event1.jpg';
+import event2 from './../../assets/event2.jpg';
+import event3 from './../../assets/event3.jpg';
+
+// importar fotos
 
 
 // Componente EventCard
 export function EventCard({ event }: EventCardProps) {
 
+  let imageSource;
+
+  switch (event.image) {
+    case 'event1':
+      imageSource = event1;
+      break;
+    case 'event2':
+      imageSource = event2;
+      break;
+    case 'event3':
+      imageSource = event3;
+      break;
+    default:
+      imageSource = event1;
+      break;
+  }
+
   return (
     <article className={styles.cardContainer}>
       <div className={styles.imageWithTag}>
-        <img className={styles.eventImg} src={event.image} alt="Event image" />
+        <img className={styles.eventImg} src={imageSource} alt="Event image" />
         <div className={styles.tagContainer}>
           <CategoryTag text={event.category} />
         </div>
@@ -27,10 +49,10 @@ export function EventCard({ event }: EventCardProps) {
       <div className={styles.bottomContent}>
         <div>
           <p className={styles.organizedBy}>Organizado por</p>
-          <p className={styles.organizer}>{event.organizer}</p>
+          <p className={styles.organizer}>{event.organizedBy}</p>
         </div>
         <div>
-          <a className={styles.eventLink} href={event.href}>Ir al evento {'>'}</a>
+          <a className={styles.eventLink} href="">Ir al evento {'>'}</a>
         </div>
       </div>
     </article>

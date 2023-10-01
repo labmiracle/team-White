@@ -40,11 +40,7 @@ function NewEventForm() {
 
             const decoded = jwt_decode(token) as { mail: string, id: number, alias: string };
 
-            console.log(decoded);
-
             const updatedEvent = { ...newEvent, userId: decoded.id, organizedBy: decoded.alias };
-
-            console.log(updatedEvent);
 
             const response = await axios.post('http://localhost:5000/api/events', updatedEvent, {
                 headers: {
@@ -77,14 +73,14 @@ function NewEventForm() {
 
     return (
         <div className={style.container}>
-           
-            <div className ={style.formContainer}>
-                 <h2 className={style.formTitle}>Crear Nuevo Evento</h2>
+
+            <div className={style.formContainer}>
+                <h2 className={style.formTitle}>Crear Nuevo Evento</h2>
                 <form className={style.form} onSubmit={handleSubmit}>
                     <div className={style.divForm}>
                         <label className={style.inputLabel}>Título: </label>
                         <input
-                        className={style.formInput}
+                            className={style.formInput}
                             type="text"
                             name="title"
                             value={newEvent.title}
@@ -139,7 +135,7 @@ function NewEventForm() {
                     <div className={style.divForm}>
                         <label className={style.inputLabel}>Descripción: </label>
                         <input
-                            
+
                             className={style.formInput}
                             type="text"
                             name="description"
@@ -159,12 +155,12 @@ function NewEventForm() {
                             required
                         />
                     </div>
-                    <button className={style.createbtn}   type="submit">Crear Evento</button>
+                    <button className={style.createbtn} type="submit">Crear Evento</button>
                     {error && <div className={style.error}>{error}</div>}
                 </form>
             </div>
             <div>
-                <img src={createEvent} alt="registrar evento" width={500} height={500}/>
+                <img src={createEvent} alt="registrar evento" width={500} height={500} />
             </div>
 
         </div>
