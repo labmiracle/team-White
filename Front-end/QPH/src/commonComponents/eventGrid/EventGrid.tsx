@@ -2,7 +2,11 @@ import { HomeEvent } from '../../models/home.event';
 import { EventCard } from '../eventCard/EventCard';
 import styles from './EventGrid.module.css'
 
-export const EventGrid = (events: HomeEvent[]) => {
+export interface EventGridProps {
+    events: HomeEvent[];
+}
+
+export const EventGrid = ({ events }: EventGridProps) => {
 
     return (
         <div className={styles.eventGrid}>
