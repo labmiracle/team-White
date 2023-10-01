@@ -23,13 +23,13 @@ const Login = () => {
 
       const token = response.data;
 
-      if (token) {
-        localStorage.setItem('token', token);
+      if (!token) {
+        throw new Error;
       }
-      // const { token } = response.data;
-      //window.location.href = '/main';
+
+      localStorage.setItem('token', token);
+
     } catch (error) {
-      console.error('Login failed:', error);
       setError('Algo anda mal por favor revisa el e-mail o la contraseña');
     }
   };
