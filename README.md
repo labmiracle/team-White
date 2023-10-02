@@ -18,5 +18,7 @@ Para configurar y ejecutar la aplicación localmente:
 6) Acceder a la aplicación en el navegador utilizando la siguiente URL: http://localhost:5000
 
 ## Documentación
+- La documentación completa del proyecto se encuentra aquí: [Documentación - QPH](https://drive.google.com/drive/folders/1BqXZNUz5MIPDFrqqfMwTp3414qMyUbIq?usp=sharing).
 
+- Para acceder a la documentación de la API correr el servidor desde 'Back-end\Paradigm.Express.WebApi.Bootstrap-main\' con 'npm run dev' e ingresar a la siguiente URL: http://localhost:5000/docs
 
