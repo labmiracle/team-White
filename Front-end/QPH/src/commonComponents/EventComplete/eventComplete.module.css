@@ -4,8 +4,8 @@
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    width: 700px;
-    height: 900px;
+    width: 600px;
+    height: 700px;
     position: relative;
     background-color: white;
     box-shadow: #00000020 0 4px 12px;
@@ -20,7 +20,7 @@
 .eventImg {
     width: 100%;
     max-width: 100%;
-    height: 430px;
+    height: 350px;
     aspect-ratio: 16/12;
     object-fit: cover;
     border-top-left-radius: 10px;
@@ -86,7 +86,7 @@
     font-size: 15px;
     text-align: left;
     margin-left: 17px;
-    margin-top: -3em;
+    margin-top: -1em;
     font-weight: 500;
 }
 
@@ -108,7 +108,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: -100px;
+    margin-top: -80px;
 }
 
 .bottomContent {

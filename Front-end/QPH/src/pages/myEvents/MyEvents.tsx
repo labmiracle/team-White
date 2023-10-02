@@ -5,8 +5,9 @@ import { HomeEvent } from "../../models/home.event";
 import { ServerEvent } from "../../models/server.event";
 import { EventGrid } from "../../commonComponents/eventGrid/EventGrid";
 import Footer from "../../commonComponents/footer/Footer";
+import styles from './myEvents.module.css';
 
-const MiCuenta = () => {
+const MyEvents = () => {
 
   const [error, setError] = useState<string | null>(null);
 
@@ -57,7 +58,9 @@ const MiCuenta = () => {
 
   return (
     <>
-      <div>Mis eventos</div>
+      <div>
+        <h2 className={styles.myEventsTitle}>Mis eventos</h2>
+      </div>
       {error && <div>{error}</div>}
       <EventGrid events={events} />
       <Footer />
@@ -65,4 +68,4 @@ const MiCuenta = () => {
   )
 }
 
-export default MiCuenta
+export default MyEvents;

@@ -32,10 +32,10 @@ const Nav: React.FC = () => {
 
               </li>
               <li className={style.listItem}>
-                <Link className={style.link} to="/muestras-artísticas">Arte</Link>
+                <Link className={style.link} to="/arte">Arte</Link>
               </li>
               <li className={style.listItem}>
-                <Link className={style.link} to="/gastronomy">Gastronomía</Link>
+                <Link className={style.link} to="/gastronomia">Gastronomía</Link>
               </li>
               {isToken ? (
                 <>
@@ -43,7 +43,7 @@ const Nav: React.FC = () => {
                     <Link className={style.link} to="/crear-evento">Crear Evento</Link>
                   </li>
                   <li className={style.listItem}>
-                    <Link className={style.link} to="/mi-cuenta">Mis Eventos</Link>
+                    <Link className={style.link} to="/mis-eventos">Mis Eventos</Link>
                   </li>
                   <li className={style.listItem}>
                     <li className={style.link} onClick={handleLogout}>Cerrar sesión</li>

@@ -35,9 +35,6 @@ const EventComplete: React.FC<EventCompleteProps> = ({ event }) => {
           <p className={styles.organizedBy}>Organizado por</p>
           <p className={styles.organizer}>{event.organizedBy}</p>
         </div>
-        <div>
-          <a className={styles.eventLink} href="">Ir al evento {'>'}</a>
-        </div>
       </div>
     </article>
   );

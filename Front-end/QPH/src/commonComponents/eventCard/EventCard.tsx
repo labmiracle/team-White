@@ -4,11 +4,8 @@ import { EventCardProps } from "../../types";
 import event1 from './../../assets/event1.jpg';
 import event2 from './../../assets/event2.jpg';
 import event3 from './../../assets/event3.jpg';
+import { Link } from "react-router-dom";
 
-// importar fotos
-
-
-// Componente EventCard
 export function EventCard({ event }: EventCardProps) {
 
   let imageSource;
@@ -52,7 +49,7 @@ export function EventCard({ event }: EventCardProps) {
           <p className={styles.organizer}>{event.organizedBy}</p>
         </div>
         <div>
-          <a className={styles.eventLink} href="">Ir al evento {'>'}</a>
+          <Link to={`/event/${event.id}`} className={styles.eventLink}>Ir al evento {'>'}</Link>
         </div>
       </div>
     </article>

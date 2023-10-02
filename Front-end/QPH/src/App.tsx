@@ -9,7 +9,9 @@ import NewEventForm from "./commonComponents/newEvent/NewEventForm";
 import ProtectedRoutes from "./router/protectedRoute/ProtectedRoutes";
 import Nav from "./commonComponents/nav/Nav";
 import Footer from "./commonComponents/footer/Footer";
-import MiCuenta from "./pages/miCuenta/MiCuenta";
+import Event from "./pages/event/Event";
+import MyEvents from "./pages/myEvents/MyEvents";
+
 
 function App() {
 
@@ -22,12 +24,12 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/registrar" element={<Register />} />
-          <Route path="/gastronomy" element={<Gastronomy />} />
-          <Route path="/muestras-artísticas" element={<Art />} />
+          <Route path="/gastronomia" element={<Gastronomy />} />
+          <Route path="/arte" element={<Art />} />
           <Route path="/musica" element={<Music />} />
-          <Route path="/mi-cuenta" element={<MiCuenta />} />
-
+          <Route path="/mis-eventos" element={<MyEvents />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/event/:id" element={<Event />} />
 
 
           <Route element={<ProtectedRoutes />}>
