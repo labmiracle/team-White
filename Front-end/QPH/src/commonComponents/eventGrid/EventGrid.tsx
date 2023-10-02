@@ -7,6 +7,7 @@ export interface EventGridProps {
     onDelete?: (eventId: number) => void;
 }
 
+// Component for displaying multiple EventCards
 export const EventGrid = ({ events, onDelete }: EventGridProps) => {
 
     return (

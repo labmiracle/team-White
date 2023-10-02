@@ -8,6 +8,10 @@ import { AdminFilter } from "../filters/admin.filter";
 import { UsersServices } from "../services/users.services";
 
 
+
+// UsersController, methods only accesible by admins
+
+
 @Security("x-auth")
 @Path("/api/users")
 @Tags("Users")
@@ -24,7 +28,6 @@ export class UsersController extends ApiController {
         try {
             return this.repo.find("active = ?", [1]);
         } catch (error) {
-            console.log(error);
             this.httpContext.response.sendStatus(500);
             return;
         }

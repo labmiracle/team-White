@@ -16,6 +16,7 @@ const Music: React.FC = () => {
         const response = await axios.get("http://localhost:5000/api/events/category/Música");
         const serverEvents: ServerEvent[] = response.data;
 
+        // Map server events to frontend format
         const frontendEvents: HomeEvent[] = serverEvents.map((serverEvent, index) => ({
           id: serverEvent.id,
           title: serverEvent.title,

@@ -5,6 +5,9 @@ import styles from './NewEventForm.module.css';
 import jwt_decode from "jwt-decode";
 import createEvent from "../../assets/Concert-login.jpg"
 
+/*  Component for creating a new event. It displays a form for sending the event details, and
+    uses the jwt from the local storage to get the user's id and alias.
+ */
 function NewEventForm() {
 
     const [newEvent, setNewEvent] = useState<NewEvent>({
@@ -31,6 +34,7 @@ function NewEventForm() {
         e.preventDefault();
 
         try {
+            // gets jwt token
             const token = localStorage.getItem('token');
 
             if (!token) {
@@ -40,6 +44,7 @@ function NewEventForm() {
 
             const decoded = jwt_decode(token) as { mail: string, id: number, alias: string };
 
+            // sets userId and organizedBy with data obtained from jwt token
             const updatedEvent = { ...newEvent, userId: decoded.id, organizedBy: decoded.alias };
 
             const response = await axios.post('http://localhost:5000/api/events', updatedEvent, {

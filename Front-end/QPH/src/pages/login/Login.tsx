@@ -12,6 +12,7 @@ const Login = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
+  // Function to handle login form submission. If no jwt token is received it will throw error
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -25,7 +26,7 @@ const Login = () => {
       const token = response.data;
 
       if (!token) {
-        throw new Error;
+        throw new Error("No token received");
       }
 
       localStorage.setItem('token', token);

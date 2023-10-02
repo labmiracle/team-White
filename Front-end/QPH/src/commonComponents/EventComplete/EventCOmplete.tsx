@@ -8,6 +8,7 @@ interface EventCompleteProps {
   event: HomeEvent;
 }
 
+// Component for displaying a complete event
 const EventComplete: React.FC<EventCompleteProps> = ({ event }) => {
   return (
     <article className={styles.eventContainer}>

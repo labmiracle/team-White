@@ -10,7 +10,7 @@ export default function Carousel({ events }: CarouselProps) {
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  // Función para cambiar la tarjeta cada 3 segundos
+  // Function to change the card every 5 seconds
   useEffect(() => {
 
     const timer = setInterval(() => {

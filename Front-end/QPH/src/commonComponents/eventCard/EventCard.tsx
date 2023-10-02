@@ -15,12 +15,15 @@ export function EventCard({ event, onDelete }: EventCardProps) {
   const location = useLocation();
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
 
+  // Determine whether to show delete and edit buttons based on the current location
   const shouldShowButtons = location.pathname === '/mis-eventos';
 
+  // Handler for the "Delete" button click
   const handleDeleteClick = () => {
     setShowConfirmDialog(true);
   };
 
+  // Handler for confirming the event deletion
   const handleConfirmDelete = () => {
     if (onDelete) {
       onDelete(event.id);
@@ -28,7 +31,7 @@ export function EventCard({ event, onDelete }: EventCardProps) {
     }
   };
 
-  // Obtiene la ruta de la imagen según el nombre en event.image
+  // Get the image source based on the event's image name
   let imageSource = eventImages[event.image] || eventImages.default;
 
   return (

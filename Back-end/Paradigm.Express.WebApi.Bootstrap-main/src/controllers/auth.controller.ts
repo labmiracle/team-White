@@ -26,6 +26,7 @@ export class AuthController extends ApiController {
         try {
             const valid = await this.service.validateLoginUser(loginUser);
 
+            // if the login credentials are valid, generate the JWT token
             if (valid) {
 
                 const userId = await this.service.getUserId(loginUser.mail);
@@ -36,6 +37,7 @@ export class AuthController extends ApiController {
                 return token;
             }
 
+            // if user not valid return 401
             this.httpContext.response.sendStatus(401);
         } catch {
             this.httpContext.response.sendStatus(500);

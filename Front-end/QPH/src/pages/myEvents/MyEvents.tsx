@@ -11,6 +11,7 @@ const MyEvents = () => {
 
   const [error, setError] = useState<string | null>(null);
 
+  // Get JWT token from local storage
   const token = localStorage.getItem("token");
 
   if (!token) {
@@ -25,6 +26,8 @@ const MyEvents = () => {
   const [events, setEvents] = useState<HomeEvent[]>([]);
 
   useEffect(() => {
+
+    // function that fetches events created by the logged user, using id from parameters
     async function fetchEvents() {
       try {
         const response = await axios.get(`http://localhost:5000/api/events/user/${id}`);

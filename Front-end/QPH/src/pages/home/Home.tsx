@@ -8,16 +8,23 @@ import { EventGrid } from "../../commonComponents/eventGrid/EventGrid";
 
 const Home: React.FC = () => {
 
+    // State to store featured events
     const [featuredEvents, setFeaturedEvents] = useState<HomeEvent[]>([]);
+
+    // State to store other events
     const [events, setEvents] = useState<HomeEvent[]>([]);
 
+    // useEffect to fetch and set featured events
     useEffect(() => {
         async function fetchFeaturedEvents() {
             try {
                 const response = await axios.get("http://localhost:5000/api/events/featured");
                 let serverEvents: ServerEvent[] = response.data;
+
+                // Limit the number of featured events to display to 3
                 serverEvents = serverEvents.slice(0, 3);
 
+                // Map server events to frontend format
                 const frontendEvents: HomeEvent[] = serverEvents.map((serverEvent) => ({
                     id: serverEvent.id,
                     title: serverEvent.title,
@@ -42,6 +49,7 @@ const Home: React.FC = () => {
         fetchFeaturedEvents();
     }, []);
 
+    // useEffect to fetch and set other events
     useEffect(() => {
         async function fetchEvents() {
             try {
@@ -63,6 +71,7 @@ const Home: React.FC = () => {
                     organizedBy: serverEvent.organizedBy,
                 }));
 
+                // Limit the number of events to display to 10
                 const firstEvents = frontendEvents.slice(0, 10);
 
                 setEvents(firstEvents);
