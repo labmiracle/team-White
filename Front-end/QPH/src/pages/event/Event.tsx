@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
-import EventComplete from "../../commonComponents/EventComplete/EventComplete";
+import EventComplete from "../../commonComponents/EventComplete/EventCOmplete";
 import { useParams } from 'react-router-dom';
 import axios from "axios";
 import { HomeEvent } from "../../models/home.event";
 import { ServerEvent } from "../../models/server.event";
-import event1 from './../../assets/event1.jpg';
 
 const Event: React.FC = () => {
 
@@ -12,7 +11,6 @@ const Event: React.FC = () => {
     const { id } = useParams();
 
     const [event, setEvent] = useState<HomeEvent>();
-
 
     useEffect(() => {
 
@@ -31,7 +29,7 @@ const Event: React.FC = () => {
                     time: serverEvent.time,
                     description: serverEvent.description,
                     userId: serverEvent.userId,
-                    image: event1,
+                    image: `event${serverEvent.id}`,
                     category: serverEvent.category,
                     featured: serverEvent.featured,
                     organizedBy: serverEvent.organizedBy,

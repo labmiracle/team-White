@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./eventComplete.module.css";
 import { HomeEvent } from "../../models/home.event";
 import { CategoryTag } from "../eventCard/CategoryTag";
-import event1 from './../../assets/event1.jpg';
+import eventImages from "../eventCard/eventImages";
 
 interface EventCompleteProps {
   event: HomeEvent;
@@ -10,10 +10,15 @@ interface EventCompleteProps {
 
 // Component for displaying a complete event
 const EventComplete: React.FC<EventCompleteProps> = ({ event }) => {
+
+
+  // Get the image source based on the event's image name
+  let imageSource = eventImages[event.image] || eventImages.default;
+
   return (
     <article className={styles.eventContainer}>
       <div className={styles.imageWithTag}>
-        <img className={styles.eventImg} src={event1} alt="Event image" />
+        <img className={styles.eventImg} src={imageSource} alt="Event image" />
         <div className={styles.tagContainer}>
           <CategoryTag text={event.category} />
         </div>
