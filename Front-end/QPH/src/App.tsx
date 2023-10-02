@@ -38,6 +38,7 @@ function App() {
             <Route path="/crear-evento" element={<NewEventForm />} />
           </Route>
         </Routes>
+        <div style={{ height: '100px' }}></div>
         <Footer />
       </BrowserRouter>
 

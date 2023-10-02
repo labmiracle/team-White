@@ -59,7 +59,7 @@ export function EventCard({ event, onDelete }: EventCardProps) {
         <div className={styles.topContent}>
           <div>
             <h2 className={styles.title}>{event.title}</h2>
-            <p className={styles.place}>{event.place}</p>
+            <p className={styles.place}>Lugar: {event.place}</p>
           </div>
           <h3 className={styles.date}>{event.date} {event.time}</h3>
         </div>
