@@ -5,6 +5,8 @@ import { DELETE, GET, POST, PUT, Path, PathParam, Security } from "typescript-re
 import { Response, Tags } from "typescript-rest-swagger";
 import { NewEvent } from "./controllerModels/new.event";
 import { EventsServices } from "../services/events.services";
+import { Body } from "node-fetch";
+import { AuthFilter } from "../filters/auth.filter";
 
 @Path("/api/events")
 @Tags("Events")
@@ -17,9 +19,9 @@ export class EventsController extends ApiController {
     @GET
     @Response<string>(500, "Internal server error")
     @Action({ route: "/" })
-    async get(): Promise<Event[]> {
+    async get(): Promise<Event[] | undefined> {
         try {
-            return this.repo.find(" active = ?", [1]);
+            return this.repo.find(" active = ? AND featured IS NULL", [1]);
         } catch (error) {
             this.httpContext.response.sendStatus(500);
             return;
@@ -28,26 +30,40 @@ export class EventsController extends ApiController {
 
     @GET
     @Response<string>(404, "Event not found")
-    @Path(":id")
-    @Action({ route: "/:id" })
-    async getOne(@PathParam("id") id: number): Promise<Event> {
+    @Path("/event/:id")
+    @Action({ route: "/event/:id" })
+    async getOne(@PathParam("id") id: number): Promise<Event | undefined> {
         try {
-            return this.repo.getById(id);
+            const event = await this.repo.getById(id);
+
+            if (event) {
+                return event;
+            }
+
+            this.httpContext.response.status(404).send("Event not found");
+            return;
         } catch (error) {
-            this.httpContext.response.sendStatus(404);
+            this.httpContext.response.sendStatus(500);
             return;
         }
     }
 
     @GET
-    @Response<string>(404, "User not found")
+    @Response<string>(404, "Events and/or user not found")
     @Path("/user/:id")
     @Action({ route: "/user/:id" })
-    async getByUser(@PathParam("id") id: number): Promise<Event[]> {
+    async getByUser(@PathParam("id") id: number): Promise<Event[] | undefined> {
         try {
-            return this.repo.find(" userId = ? AND active = ?", [id, 1]);
+            const events = await this.repo.find(" userId = ? AND active = ?", [id, 1]);
+
+            if (events.length !== 0) {
+                return events;
+            }
+
+            this.httpContext.response.status(404).send("Events and/or user not found")
+            return;
         } catch (error) {
-            this.httpContext.response.sendStatus(404);
+            this.httpContext.response.sendStatus(500);
             return;
         }
     }
@@ -58,9 +74,16 @@ export class EventsController extends ApiController {
     @Action({ route: "/category/:category" })
     async getByCategory(@PathParam("category") category: string): Promise<Event[] | undefined> {
         try {
-            return this.repo.find(" category = ? AND active = ?", [category, 1]);
+            const events = await this.repo.find(" category = ? AND active = ?", [category, 1]);
+
+            if (events.length !== 0) {
+                return events;
+            }
+
+            this.httpContext.response.status(404).send("Events and/or category not found")
+            return;
         } catch (error) {
-            this.httpContext.response.sendStatus(404);
+            this.httpContext.response.sendStatus(500);
             return;
         }
     }
@@ -73,12 +96,13 @@ export class EventsController extends ApiController {
     async getFeaturedEvents(): Promise<Event[] | undefined> {
         try {
             const events = await this.repo.find(" featured = ? AND active = ?", [1, 1]);
-            if (events.length === 0) {
-                this.httpContext.response.sendStatus(404);
-                return;
+
+            if (events.length !== 0) {
+                return events;
             }
 
-            return events;
+            this.httpContext.response.sendStatus(404);
+            return;
         } catch {
             this.httpContext.response.sendStatus(500);
             return;
@@ -89,23 +113,32 @@ export class EventsController extends ApiController {
     @POST
     @Response<Event>(201, "Event created")
     @Response<string>(500, "Internal server error")
-    @Action({ route: "/", fromBody: true })
+    @Action({ route: "/", fromBody: true, filters: [AuthFilter] })
     async post(newEvent: NewEvent): Promise<Event> {
         try {
+
             const event = await this.service.insertNewEvent(newEvent);
+
+            if (!event) {
+                this.httpContext.response.status(500).send("Internal server error: error when creating the event");
+                return;
+            }
+
             this.httpContext.response.sendStatus(201);
-            return event;
+            return;
         } catch (error) {
+            console.log(error);
             this.httpContext.response.sendStatus(500);
             return;
         }
     }
 
+
     @Security("x-auth")
     @PUT
     @Response<Event>(200, "Event updated correctly")
     @Response<string>(500, "Internal server error")
-    @Action({ route: "/", method: HttpMethod.PUT, fromBody: true })
+    @Action({ route: "/", method: HttpMethod.PUT, fromBody: true, filters: [AuthFilter] })
     async update(event: Event): Promise<Event | undefined> {
         try {
             const token = this.httpContext.request.headers['x-auth'] as string;
@@ -129,7 +162,7 @@ export class EventsController extends ApiController {
     @Response<Event>(200, "Event deleted correctly")
     @Response<string>(500, "Internal server error")
     @Path(":id")
-    @Action({ route: "/:id" })
+    @Action({ route: "/:id", filters: [AuthFilter] })
     async delete(@PathParam("id") id: number) {
         try {
             const event = await this.repo.getById(id);

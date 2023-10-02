@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+.container {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.formContainer {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    justify-content: space-around;
+    align-items: center;
+    width: 500px;
+    margin-right: 100px;
+    height: 500px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.formInput {
+    text-align: left;
+    padding-left: 15px;
+    color: #000000;
+    border: solid #FFA41B;
+    width: 70%;
+    height: 48px;
+    border-radius: 48px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+}
+
+.form {
+    border: solid #000000 1px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.divForm {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.inputLabel {
+    font-size: 22px;
+    color: #525FE1;
+    font-weight: 600;
+}
+
+.formTitle {
+    font-size: 28px;
+    color: #525FE1
+}
+
+.createbtn {
+    /* padding-left: 15px; */
+    color: #FFA41B;
+    border: solid #FFA41B;
+    width: 50%;
+    height: 48px;
+    border-radius: 48px;
+    background-color: #525FE1;
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+}

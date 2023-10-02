@@ -1,8 +1,13 @@
 import { useState, useEffect } from "react";
-import { Event } from "../../types";
 import { EventCard } from "../eventCard/EventCard";
-export default function Carousel() {
-  const events: Event[] = Event.createEventList();
+import { HomeEvent } from "../../models/home.event";
+
+export interface CarouselProps {
+  events: HomeEvent[];
+}
+
+export default function Carousel({ events }: CarouselProps) {
+
   const [currentIndex, setCurrentIndex] = useState(0);
 
   // Función para cambiar la tarjeta cada 3 segundos
@@ -16,8 +21,6 @@ export default function Carousel() {
       clearInterval(timer);
     };
   }, [events.length]);
-
-  console.log(events.length)
 
   return (
     <>

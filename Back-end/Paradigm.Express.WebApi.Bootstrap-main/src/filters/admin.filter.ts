@@ -20,7 +20,7 @@ export class AdminFilter implements IFilter {
                 return;
             }
 
-            const decodedToken = jwt.decode(token) as { mail: string };
+            const decodedToken = jwt.decode(token) as { mail: string, id: number };
 
             const isAdmin = await this.service.validateAdmin(decodedToken.mail);
 

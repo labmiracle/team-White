@@ -5,23 +5,43 @@ import Music from "./pages/music/Music";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./pages/login/Login";
 import Register from "./pages/login/Register";
+import NewEventForm from "./commonComponents/newEvent/NewEventForm";
+import ProtectedRoutes from "./router/protectedRoute/ProtectedRoutes";
+import Nav from "./commonComponents/nav/Nav";
+import Footer from "./commonComponents/footer/Footer";
+import Event from "./pages/event/Event";
+import MyEvents from "./pages/myEvents/MyEvents";
+import EditEventForm from "./commonComponents/editEvent/EditEventForm";
+
 
 function App() {
 
   return (
     <div className="App">
+
+
       <BrowserRouter>
-      <Routes>
+        <Nav />
+        <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/registrar" element={<Register />}/>
-          <Route path="/gastronomy" element={<Gastronomy />} />
-          <Route path="/muestras-artísticas" element={<Art />} />
+          <Route path="/registrar" element={<Register />} />
+          <Route path="/gastronomia" element={<Gastronomy />} />
+          <Route path="/arte" element={<Art />} />
           <Route path="/musica" element={<Music />} />
+          <Route path="/mis-eventos" element={<MyEvents />} />
           <Route path="/login" element={<Login />} />
-        
-      </Routes>
+          <Route path="/event/:id" element={<Event />} />
+          <Route path="/editar-evento/:id" element={<EditEventForm />}></Route>
+
+
+          <Route element={<ProtectedRoutes />}>
+            <Route path="/crear-evento" element={<NewEventForm />} />
+          </Route>
+        </Routes>
+        <div style={{ height: '100px' }}></div>
+        <Footer />
       </BrowserRouter>
-      
+
     </div>
   )
 }

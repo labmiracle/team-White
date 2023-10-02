@@ -5,13 +5,19 @@ import { Event } from "../models/event";
 import { InsertionResult } from "../core/repositories/commands/db.command";
 import jwt from "jsonwebtoken";
 import { UsersRepository } from "../repositories/users.repository";
+import path from "path";
+import fs from 'fs';
+import multer from 'multer';
+import { Request } from 'express';
 
 @Injectable({ lifeTime: DependencyLifeTime.Scoped })
 export class EventsServices {
+
     constructor(private repo: EventsRepository, private usersRepo: UsersRepository) { }
 
-    async insertNewEvent(newEvent: NewEvent): Promise<Event> {
+    async insertNewEvent(newEvent: NewEvent): Promise<Event | null> {
         try {
+
             const event = new Event;
 
             event.title = newEvent.title;
@@ -25,19 +31,20 @@ export class EventsServices {
             event.image = newEvent.image;
             event.category = newEvent.category;
             event.featured = null;
+            event.organizedBy = newEvent.organizedBy;
 
             const metadata: InsertionResult<number> = await this.repo.insertOne(event);
             event.id = metadata.insertId;
 
             return event;
         } catch {
-            throw new Error;
+            throw new Error("Error at insertion of event");
         }
     }
 
     async validateUserId(token: string, userId: number): Promise<boolean> {
         try {
-            const decodedToken = jwt.decode(token) as { mail: string };
+            const decodedToken = jwt.decode(token) as { mail: string, id: number };
             const user = await this.usersRepo.findByMail(decodedToken.mail);
 
             if (user[0].id === userId) {

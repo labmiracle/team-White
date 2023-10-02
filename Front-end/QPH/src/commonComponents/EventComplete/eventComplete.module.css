@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+.eventContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 600px;
+    height: 700px;
+    position: relative;
+    background-color: white;
+    box-shadow: #00000020 0 4px 12px;
+    border-radius: 10px;
+    border-top: .1em solid white;
+    border-bottom: .1em solid white;
+    font-family: 'Poppins', sans-serif;
+    margin-left: 50px;
+    margin-bottom: 50px;
+}
+
+.eventImg {
+    width: 100%;
+    max-width: 100%;
+    height: 350px;
+    aspect-ratio: 16/12;
+    object-fit: cover;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.imageWithTag {
+    position: relative;
+}
+
+.tagContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+.title {
+    font-size: 35px;
+    margin-left: 15px;
+    text-align: left;
+    margin-top: 1em;
+    margin-bottom: 0em;
+}
+
+.place {
+    font-size: 18px;
+    margin-left: 18px;
+    opacity: 0.5;
+    text-align: left;
+    margin-top: -7px;
+}
+
+.date {
+    font-size: 25px;
+    color: red;
+    text-align: right;
+    margin-right: 10px;
+    margin-top: 18px;
+}
+
+.organizedBy {
+    font-size: 15px;
+    opacity: 0.7;
+    text-align: left;
+    margin-left: 10px;
+    margin-bottom: 0em;
+}
+
+.organizer {
+    font-size: 20px;
+    text-align: left;
+    margin-left: 10px;
+    margin-top: 0em;
+    font-weight: 700;
+}
+
+.description {
+    font-size: 15px;
+    text-align: left;
+    margin-left: 17px;
+    margin-top: -1em;
+    font-weight: 500;
+}
+
+.line {
+    width: 500px;
+    opacity: 0.5;
+    margin-left: 80px;
+}
+
+.eventLink {
+    color: black;
+    font-size: 15px;
+    text-align: right;
+    opacity: 0.7;
+    margin-right: 10px;
+}
+
+.topContent {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: -80px;
+}
+
+.bottomContent {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

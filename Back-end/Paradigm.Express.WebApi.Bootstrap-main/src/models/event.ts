@@ -15,4 +15,5 @@ export class Event implements IEvent {
     image: string = "";
     category: string = "";
     featured?: number | null = null;
+    organizedBy: string = "";
 }
