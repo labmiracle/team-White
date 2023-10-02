@@ -4,7 +4,7 @@ import styles from './EventGrid.module.css'
 
 export interface EventGridProps {
     events: HomeEvent[];
-    onDelete: (eventId: number) => void;
+    onDelete?: (eventId: number) => void;
 }
 
 export const EventGrid = ({ events, onDelete }: EventGridProps) => {

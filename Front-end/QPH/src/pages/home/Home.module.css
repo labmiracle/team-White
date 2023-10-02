@@ -4,8 +4,23 @@
     background-color: #FFA41B;
     color: white;
     display: flex;
-    flex-direction: column;    
+    flex-direction: column;
     width: 420px;
+    text-align: center;
+    margin: 50px;
+    border-radius: 20px;
+    box-shadow: #00000020 0 4px 12px;
+    border-top: .1em solid #FFA41B;
+    border-bottom: .1em solid #FFA41B;
+}
+
+.sectionSubtitle {
+    font-family: 'Poppins', sans-serif;
+    background-color: #FFA41B;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    width: 300px;
     text-align: center;
     margin: 50px;
     border-radius: 20px;

@@ -9,7 +9,7 @@ import { HomeEvent } from "../../models/home.event";
 
 export interface EventCardProps {
   event: HomeEvent;
-  onDelete: (eventId: number) => void;
+  onDelete?: (eventId: number) => void;
 }
 
 export function EventCard({ event, onDelete }: EventCardProps) {
@@ -24,8 +24,10 @@ export function EventCard({ event, onDelete }: EventCardProps) {
   };
 
   const handleConfirmDelete = () => {
-    onDelete(event.id);
-    setShowConfirmDialog(false);
+    if (onDelete) {
+      onDelete(event.id);
+      setShowConfirmDialog(false);
+    }
   };
 
   let imageSource;

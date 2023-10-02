@@ -197,6 +197,10 @@
 				"category": {
 					"type": "string",
 					"description": ""
+				},
+				"organizedBy": {
+					"type": "string",
+					"description": ""
 				}
 			},
 			"type": "object",
@@ -209,7 +213,8 @@
 				"description",
 				"userId",
 				"image",
-				"category"
+				"category",
+				"organizedBy"
 			]
 		},
 		"User": {
@@ -368,13 +373,6 @@
 				"tags": [
 					"Events"
 				],
-				"security": [
-					{
-						"default": [
-							"x-auth"
-						]
-					}
-				],
 				"parameters": []
 			},
 			"post": {
@@ -476,7 +474,7 @@
 				]
 			}
 		},
-		"/api/events/{id}": {
+		"/api/events/event/{id}": {
 			"get": {
 				"operationId": "EventsGetOne",
 				"produces": [
@@ -500,51 +498,6 @@
 				"description": "",
 				"tags": [
 					"Events"
-				],
-				"parameters": [
-					{
-						"description": "",
-						"in": "path",
-						"name": "id",
-						"required": true,
-						"type": "number",
-						"format": "double"
-					}
-				]
-			},
-			"delete": {
-				"operationId": "EventsDelete",
-				"produces": [
-					"application/json",
-					"text/html"
-				],
-				"responses": {
-					"200": {
-						"description": "Event deleted correctly",
-						"schema": {
-							"$ref": "#/definitions/Event"
-						}
-					},
-					"204": {
-						"description": "No content"
-					},
-					"500": {
-						"description": "Internal server error",
-						"schema": {
-							"type": "string"
-						}
-					}
-				},
-				"description": "",
-				"tags": [
-					"Events"
-				],
-				"security": [
-					{
-						"default": [
-							"x-auth"
-						]
-					}
 				],
 				"parameters": [
 					{
@@ -663,6 +616,53 @@
 					"Events"
 				],
 				"parameters": []
+			}
+		},
+		"/api/events/{id}": {
+			"delete": {
+				"operationId": "EventsDelete",
+				"produces": [
+					"application/json",
+					"text/html"
+				],
+				"responses": {
+					"200": {
+						"description": "Event deleted correctly",
+						"schema": {
+							"$ref": "#/definitions/Event"
+						}
+					},
+					"204": {
+						"description": "No content"
+					},
+					"500": {
+						"description": "Internal server error",
+						"schema": {
+							"type": "string"
+						}
+					}
+				},
+				"description": "",
+				"tags": [
+					"Events"
+				],
+				"security": [
+					{
+						"default": [
+							"x-auth"
+						]
+					}
+				],
+				"parameters": [
+					{
+						"description": "",
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"type": "number",
+						"format": "double"
+					}
+				]
 			}
 		},
 		"/api/health": {

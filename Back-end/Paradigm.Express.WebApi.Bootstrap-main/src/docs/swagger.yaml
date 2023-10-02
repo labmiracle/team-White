@@ -154,6 +154,9 @@ definitions:
             category:
                 type: string
                 description: ""
+            organizedBy:
+                type: string
+                description: ""
         type: object
         required:
             - title
@@ -165,6 +168,7 @@ definitions:
             - userId
             - image
             - category
+            - organizedBy
     User:
         description: ""
         properties:
@@ -278,10 +282,6 @@ paths:
             description: ""
             tags:
                 - Events
-            security:
-                -
-                    default:
-                        - x-auth
             parameters: []
         post:
             operationId: EventsPost
@@ -349,7 +349,7 @@ paths:
                     required: true
                     schema:
                         $ref: '#/definitions/Event'
-    '/api/events/{id}':
+    '/api/events/event/{id}':
         get:
             operationId: EventsGetOne
             produces:
@@ -367,37 +367,6 @@ paths:
             description: ""
             tags:
                 - Events
-            parameters:
-                -
-                    description: ""
-                    in: path
-                    name: id
-                    required: true
-                    type: number
-                    format: double
-        delete:
-            operationId: EventsDelete
-            produces:
-                - application/json
-                - text/html
-            responses:
-                '200':
-                    description: 'Event deleted correctly'
-                    schema:
-                        $ref: '#/definitions/Event'
-                '204':
-                    description: 'No content'
-                '500':
-                    description: 'Internal server error'
-                    schema:
-                        type: string
-            description: ""
-            tags:
-                - Events
-            security:
-                -
-                    default:
-                        - x-auth
             parameters:
                 -
                     description: ""
@@ -480,6 +449,38 @@ paths:
             tags:
                 - Events
             parameters: []
+    '/api/events/{id}':
+        delete:
+            operationId: EventsDelete
+            produces:
+                - application/json
+                - text/html
+            responses:
+                '200':
+                    description: 'Event deleted correctly'
+                    schema:
+                        $ref: '#/definitions/Event'
+                '204':
+                    description: 'No content'
+                '500':
+                    description: 'Internal server error'
+                    schema:
+                        type: string
+            description: ""
+            tags:
+                - Events
+            security:
+                -
+                    default:
+                        - x-auth
+            parameters:
+                -
+                    description: ""
+                    in: path
+                    name: id
+                    required: true
+                    type: number
+                    format: double
     /api/health:
         get:
             operationId: HealthGet

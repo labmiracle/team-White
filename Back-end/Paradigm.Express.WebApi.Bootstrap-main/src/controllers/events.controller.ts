@@ -21,7 +21,7 @@ export class EventsController extends ApiController {
     @Action({ route: "/" })
     async get(): Promise<Event[] | undefined> {
         try {
-            return this.repo.find(" active = ?", [1]);
+            return this.repo.find(" active = ? AND featured IS NULL", [1]);
         } catch (error) {
             this.httpContext.response.sendStatus(500);
             return;
