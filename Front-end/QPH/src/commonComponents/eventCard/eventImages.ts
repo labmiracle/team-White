@@ -16,6 +16,7 @@ type EventImages = {
     [key: string]: string;
 };
 
+// maping images locally (provisional)
 const eventImages: EventImages = {
     event1,
     event2,

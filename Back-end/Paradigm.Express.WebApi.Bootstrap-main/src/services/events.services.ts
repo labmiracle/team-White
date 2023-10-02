@@ -15,6 +15,11 @@ export class EventsServices {
 
     constructor(private repo: EventsRepository, private usersRepo: UsersRepository) { }
 
+    /*
+        function that inserts an event in the database
+        it receives a NewEvent object and maps it to a Event object
+        so it can be used in the repo
+    */
     async insertNewEvent(newEvent: NewEvent): Promise<Event | null> {
         try {
 
@@ -42,6 +47,10 @@ export class EventsServices {
         }
     }
 
+    /*
+        function that is used when a user is attempting to edit or delete an event
+        it validates that the user's id matches the userId field of the event being altered
+    */
     async validateUserId(token: string, userId: number): Promise<boolean> {
         try {
             const decodedToken = jwt.decode(token) as { mail: string, id: number };

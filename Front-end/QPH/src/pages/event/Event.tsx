@@ -8,6 +8,7 @@ import event1 from './../../assets/event1.jpg';
 
 const Event: React.FC = () => {
 
+    // gettin id from url parameters
     const { id } = useParams();
 
     const [event, setEvent] = useState<HomeEvent>();
@@ -20,6 +21,7 @@ const Event: React.FC = () => {
                 const response = await axios.get(`http://localhost:5000/api/events/event/${id}`)
                 const serverEvent: ServerEvent = response.data;
 
+                // Map server event to frontend format
                 const frontendEvent: HomeEvent = {
                     id: serverEvent.id,
                     title: serverEvent.title,

@@ -9,6 +9,11 @@ import { RegisterUser } from "../controllers/controllerModels/register.user";
 export class AuthServices {
     constructor(private repo: UsersRepository) { }
 
+    /*
+        function that validates a user trying to login returning a boolean
+        first checks if the email exists in the database
+        if it exists, it checks if the password matches the hash
+    */
     async validateLoginUser(loginUser: LoginUser): Promise<boolean> {
         const users = await this.repo.find(" mail = ?", [loginUser.mail]);
 
@@ -19,6 +24,10 @@ export class AuthServices {
         }
     }
 
+
+    /*
+        function that validates if a user has admin permission
+    */
     async validateAdmin(mail: string): Promise<"isAdmin" | "isNotAdmin" | "notFound"> {
         const users = await this.repo.find(" mail = ?", [mail]);
 

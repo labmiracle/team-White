@@ -13,6 +13,7 @@ const Register = () => {
   const [alias, setAlias] = useState("");
   const navigate = useNavigate();
 
+  // Function to handle user registration
   const handleRegister = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
 
@@ -27,7 +28,7 @@ const Register = () => {
 
       });
 
-      console.log("Registration Successful:", response.data);
+      // redirect to login after a succesful registration
       navigate("/login");
 
     } catch (error) {
