@@ -71,6 +71,7 @@ export class Event {
 
 export interface EventCardProps {
   event: HomeEvent;
+  onDelete?: (eventId: number) => void;
 }
 
 export interface CategoryTagInterface {

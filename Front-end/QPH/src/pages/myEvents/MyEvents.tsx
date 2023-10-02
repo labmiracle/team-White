@@ -56,13 +56,27 @@ const MyEvents = () => {
     fetchEvents();
   }, []);
 
+  const deleteEvent = async (eventId: number) => {
+    try {
+      await axios.delete(`http://localhost:5000/api/events/${eventId}`, {
+        headers: {
+          'Content-Type': 'application/json',
+          'x-auth': `${token}`,
+        },
+      });
+
+    } catch (error) {
+      console.error('Error al eliminar el evento:', error);
+    }
+  };
+
   return (
     <>
       <div>
         <h2 className={styles.myEventsTitle}>Mis eventos</h2>
       </div>
       {error && <div>{error}</div>}
-      <EventGrid events={events} />
+      <EventGrid events={events} onDelete={deleteEvent} />
       <Footer />
     </>
   )
