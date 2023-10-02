@@ -17,7 +17,7 @@ const Art: React.FC = () => {
         const serverEvents: ServerEvent[] = response.data;
 
         // Map server events to frontend format
-        const frontendEvents: HomeEvent[] = serverEvents.map((serverEvent, index) => ({
+        const frontendEvents: HomeEvent[] = serverEvents.map((serverEvent) => ({
           id: serverEvent.id,
           title: serverEvent.title,
           place: serverEvent.place,
@@ -26,7 +26,7 @@ const Art: React.FC = () => {
           time: serverEvent.time,
           description: serverEvent.description,
           userId: serverEvent.userId,
-          image: `event${index + 1}`,
+          image: `event${serverEvent.id}`,
           category: serverEvent.category,
           featured: serverEvent.featured,
           organizedBy: serverEvent.organizedBy,
