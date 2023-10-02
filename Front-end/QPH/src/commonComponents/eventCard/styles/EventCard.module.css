@@ -14,7 +14,7 @@
     border-bottom: .1em solid white;
     font-family: 'Poppins', sans-serif;
     margin-left: 50px;
-    margin-bottom: 50px;
+    margin-bottom: 10px
 }
 
 .eventImg {
@@ -107,3 +107,10 @@
     justify-content: space-between;
     align-items: center;
 }
+
+.deleteButton {
+    margin-left: 55px;
+    margin-right: 5px;
+}
+
+.editButton {}
