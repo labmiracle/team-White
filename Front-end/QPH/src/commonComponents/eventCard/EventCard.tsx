@@ -17,7 +17,7 @@ export function EventCard({ event, onDelete }: EventCardProps) {
   const location = useLocation();
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
 
-  const shouldShowDeleteButton = location.pathname === '/mis-eventos';
+  const shouldShowButton = location.pathname === '/mis-eventos';
 
   const handleDeleteClick = () => {
     setShowConfirmDialog(true);
@@ -74,7 +74,7 @@ export function EventCard({ event, onDelete }: EventCardProps) {
           </div>
         </div>
       </article>
-      {shouldShowDeleteButton && <button onClick={handleDeleteClick}>Eliminar</button>}
+      {shouldShowButton && <button onClick={handleDeleteClick}>Eliminar</button>}
 
       {showConfirmDialog && (
         <div>
@@ -82,6 +82,12 @@ export function EventCard({ event, onDelete }: EventCardProps) {
           <button onClick={handleConfirmDelete}>Confirmar</button>
           <button onClick={() => setShowConfirmDialog(false)}>Cancelar</button>
         </div>
+      )}
+
+      {shouldShowButton && (
+        <Link to={`/editar-evento/${event.id}`}>
+          <button>Editar</button>
+        </Link>
       )}
     </div>
 

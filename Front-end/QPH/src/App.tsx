@@ -11,6 +11,7 @@ import Nav from "./commonComponents/nav/Nav";
 import Footer from "./commonComponents/footer/Footer";
 import Event from "./pages/event/Event";
 import MyEvents from "./pages/myEvents/MyEvents";
+import EditEventForm from "./commonComponents/editEvent/EditEventForm";
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
           <Route path="/mis-eventos" element={<MyEvents />} />
           <Route path="/login" element={<Login />} />
           <Route path="/event/:id" element={<Event />} />
+          <Route path="/editar-evento/:id" element={<EditEventForm />}></Route>
 
 
           <Route element={<ProtectedRoutes />}>
