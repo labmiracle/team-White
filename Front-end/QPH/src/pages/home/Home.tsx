@@ -18,7 +18,7 @@ const Home: React.FC = () => {
                 let serverEvents: ServerEvent[] = response.data;
                 serverEvents = serverEvents.slice(0, 3);
 
-                const frontendEvents: HomeEvent[] = serverEvents.map((serverEvent, index) => ({
+                const frontendEvents: HomeEvent[] = serverEvents.map((serverEvent) => ({
                     id: serverEvent.id,
                     title: serverEvent.title,
                     place: serverEvent.place,
@@ -27,7 +27,7 @@ const Home: React.FC = () => {
                     time: serverEvent.time,
                     description: serverEvent.description,
                     userId: serverEvent.userId,
-                    image: `event${index + 1}`,
+                    image: `event${serverEvent.id}`,
                     category: serverEvent.category,
                     featured: serverEvent.featured,
                     organizedBy: serverEvent.organizedBy,
@@ -48,7 +48,7 @@ const Home: React.FC = () => {
                 const response = await axios.get("http://localhost:5000/api/events");
                 const serverEvents: ServerEvent[] = response.data;
 
-                const frontendEvents: HomeEvent[] = serverEvents.map((serverEvent, index) => ({
+                const frontendEvents: HomeEvent[] = serverEvents.map((serverEvent) => ({
                     id: serverEvent.id,
                     title: serverEvent.title,
                     place: serverEvent.place,
@@ -57,7 +57,7 @@ const Home: React.FC = () => {
                     time: serverEvent.time,
                     description: serverEvent.description,
                     userId: serverEvent.userId,
-                    image: `event${index + 1}`,
+                    image: `event${serverEvent.id}`,
                     category: serverEvent.category,
                     featured: serverEvent.featured,
                     organizedBy: serverEvent.organizedBy,

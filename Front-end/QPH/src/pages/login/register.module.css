@@ -1,4 +1,6 @@
-.loginContainer{
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+.loginContainer {
     display: flex;
     flex-direction: column;
     background-color: #fff;
@@ -7,13 +9,15 @@
     width: 500px;
     margin-right: 100px;
     height: 500px;
-    
+    font-family: 'Poppins', sans-serif;
+
 }
 
-.imgContainer img{
+.imgContainer img {
     height: 500px;
 }
-.evenContainer{
+
+.evenContainer {
     padding-top: 20px;
     width: 90vw;
     height: 40%;
@@ -22,7 +26,8 @@
     justify-content: flex-end;
 
 }
-.formInput{
+
+.formInput {
     text-align: left;
     padding-left: 15px;
     color: #FFA41B;
@@ -31,7 +36,8 @@
     height: 48px;
     border-radius: 48px;
 }
-.form{
+
+.form {
     border: solid #000000 1px;
     display: flex;
     flex-direction: column;
@@ -41,27 +47,32 @@
     align-items: center;
     flex-wrap: wrap;
 }
-.formParagraph{
+
+.formParagraph {
     font-size: 28px;
+    font-weight: 800;
     color: #525FE1
 }
-.btnCreate{
+
+.btnCreate {
     width: 100%;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
     flex-wrap: wrap;
 }
-.loginBtn{
+
+.loginBtn {
     width: 150px;
     height: 48px;
     border-radius: 25px;
     color: #fff;
     background-color: #525fe1;
     font-size: 18px;
+    font-family: 'Poppins', sans-serif;
 }
 
-.userType{
+.userType {
     display: flex;
     justify-content: space-between;
     width: 38%;
@@ -69,6 +80,6 @@
     font-size: 18px;
 }
 
-.superContainer{
+.superContainer {
     margin-bottom: 50px;
 }

@@ -1,11 +1,9 @@
 import { CategoryTag } from "./CategoryTag";
 import styles from "./styles/EventCard.module.css";
-import event1 from './../../assets/event1.jpg';
-import event2 from './../../assets/event2.jpg';
-import event3 from './../../assets/event3.jpg';
 import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { HomeEvent } from "../../models/home.event";
+import eventImages from "./eventImages";
 
 export interface EventCardProps {
   event: HomeEvent;
@@ -30,22 +28,8 @@ export function EventCard({ event, onDelete }: EventCardProps) {
     }
   };
 
-  let imageSource;
-
-  switch (event.image) {
-    case 'event1':
-      imageSource = event1;
-      break;
-    case 'event2':
-      imageSource = event2;
-      break;
-    case 'event3':
-      imageSource = event3;
-      break;
-    default:
-      imageSource = event1;
-      break;
-  }
+  // Obtiene la ruta de la imagen según el nombre en event.image
+  let imageSource = eventImages[event.image] || eventImages.default;
 
   return (
     <div>

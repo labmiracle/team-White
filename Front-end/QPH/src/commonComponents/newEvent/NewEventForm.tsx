@@ -3,7 +3,7 @@ import axios from 'axios';
 import { NewEvent } from '../../models/new.event';
 import styles from './NewEventForm.module.css';
 import jwt_decode from "jwt-decode";
-import createEvent from "../../assets/Concert-login.png"
+import createEvent from "../../assets/Concert-login.jpg"
 
 function NewEventForm() {
 
